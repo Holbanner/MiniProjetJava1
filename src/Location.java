@@ -8,4 +8,22 @@ public class Location {
 	//montant total facturé au client
 	private float montant;
 
+	public Date getDateDebut() {
+		return dateDebut;
+	}
+	public void setDateDebut(Date dateDebut) {
+		this.dateDebut = dateDebut;
+	}
+	public Date getDateFin() {
+		return dateFin;
+	}
+	public void setDateFin(Date dateFin) {
+		this.dateFin = dateFin;
+	}
+	public float getMontant() {
+		return montant;
+	}
+	public void setMontant(float montant) {
+		this.montant = montant;
+	}
 }
