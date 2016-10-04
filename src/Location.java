@@ -48,10 +48,37 @@ public class Location {
 		this.articles = articles;
 	}
 
+	// constructeur, avec deux possibilités. Le second est une surcharge du
+	// premier permettant d'ajouter des articles un par un au besoin
+
+	public Location(Date dateDebut, Date dateFin, float montant, ArrayList<Article> articles) {
+		super();
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.montant = montant;
+		this.articles = articles;
+
+	}
+
+	public Location(Date dateDebut, Date dateFin, float montant) {
+		super();
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.montant = montant;
+		this.articles = new ArrayList<Article>();
+
+	}
+
 	// methodes
 
-	public void creerLocation() {
+	// ajouter un Article dans la liste
+	public void ajouterArticle(Article article) {
+		articles.add(article);
+	}
 
+	// Supprimer un Article dans la liste
+	public void supprimerArticle(Article article) {
+		articles.remove(article);
 	}
 
 }
