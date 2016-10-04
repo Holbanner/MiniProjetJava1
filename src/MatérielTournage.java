@@ -1,5 +1,5 @@
 
-public class MatérielTournage {
+public class MatérielTournage extends Article{
 //résolution défini par l'axe X et Y
 	private int x;
 	public int getX() {

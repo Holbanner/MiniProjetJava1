@@ -1,4 +1,5 @@
 import java.sql.Date;
+import java.util.ArrayList;
 
 
 public class Location {
@@ -7,6 +8,8 @@ public class Location {
 	private Date dateFin;
 	//montant total facturé au client
 	private float montant;
+	//liste d'articles
+	private ArrayList<Article> articles;
 
 	public Date getDateDebut() {
 		return dateDebut;
@@ -26,4 +29,5 @@ public class Location {
 	public void setMontant(float montant) {
 		this.montant = montant;
 	}
+	
 }

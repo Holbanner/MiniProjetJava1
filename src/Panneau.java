@@ -1,4 +1,4 @@
-public class Panneau {
+public class Panneau extends Article{
 	private int nbLed;
 
 	public int getNbLed() {

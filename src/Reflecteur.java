@@ -1,4 +1,4 @@
 
-public class Reflecteur {
+public class Reflecteur extends MatérielTournage{
 
 }

@@ -1,4 +1,4 @@
 
-public class Fond {
+public class Fond extends MatérielTournage{
 
 }

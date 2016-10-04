@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 public class Client {
 	// liste des infos sur le client
@@ -5,6 +7,8 @@ public class Client {
 	private String prénom;
 	private String coordonné;
 	private int numero;
+	//liste de locations
+	private ArrayList<Location> locations;
 	
 	public String getNom() {
 		return nom;
@@ -29,5 +33,11 @@ public class Client {
 	}
 	public void setNumero(int numero) {
 		this.numero = numero;
+	}
+	public ArrayList<Location> getLocations() {
+		return locations;
+	}
+	public void setLocations(ArrayList<Location> locations) {
+		this.locations = locations;
 	}
 }
