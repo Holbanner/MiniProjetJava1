@@ -3,6 +3,7 @@ public class Article {
 	/*
 	 * Attribut
 	 * */
+	
 	//reference du produit. Numéro de produit
 	private int ref;
 	//Marque du constructeur
