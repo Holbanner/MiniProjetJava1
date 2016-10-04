@@ -1,10 +1,15 @@
 import java.util.HashSet;
 
 public class Objectif extends Article{
-	
+	/*
+	 * Attribut
+	 * */
 	private TypeObjectif typeObjectif;
 	private HashSet<DispositifAcquisition> dispositifAcquisitions;
-
+	
+	/*
+	 * Getter & Setter
+	 */
 	public HashSet<DispositifAcquisition> getDispositifAcquisitions() {
 		return dispositifAcquisitions;
 	}

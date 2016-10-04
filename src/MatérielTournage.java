@@ -1,7 +1,15 @@
 
 public class MatérielTournage extends Article{
-//résolution défini par l'axe X et Y
+	/*
+	 * Attribut
+	 * */
+	//résolution défini par l'axe X et Y
 	private int x;
+	private int y;
+	
+	/*
+	 * Getter & Setter
+	 */
 	public int getX() {
 		return x;
 	}
@@ -14,5 +22,5 @@ public class MatérielTournage extends Article{
 	public void setY(int y) {
 		this.y = y;
 	}
-	private int y;
+	
 }

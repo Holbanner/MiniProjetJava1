@@ -1,5 +1,8 @@
 
 public class Article {
+	/*
+	 * Attribut
+	 * */
 	//reference du produit. Numéro de produit
 	private int ref;
 	//Marque du constructeur
@@ -10,6 +13,10 @@ public class Article {
 	private float prixParJour;
 	// Produit diponnible en stock
 	private int disponnibilité;
+
+	/*
+	 * Getter & Setter
+	 */
 	public int getDisponnibilité() {
 		return disponnibilité;
 	}

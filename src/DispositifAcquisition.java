@@ -1,10 +1,15 @@
 
 public class DispositifAcquisition extends Article{
-	
+	/*
+	 * Attribut
+	 * */
 	private int nbPixel;
 	private TypeObjectif typeObjectif;
 	private Resolution resolution;
 
+	/*
+	 * Getter & Setter
+	 */
 	public int getNbPixel() {
 		return nbPixel;
 	}

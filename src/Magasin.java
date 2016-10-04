@@ -1,13 +1,18 @@
 import java.util.ArrayList;
 
 public class Magasin {
+	/*
+	 * Attribut
+	 * */
 	private String nom;
 	//liste de client
 	private ArrayList<Client> clients;
 	//liste d'article
 	private ArrayList<Article> articles;
 
-	
+	/*
+	 * Getter & Setter
+	 */
 	public String getNom() {
 		return nom;
 	}

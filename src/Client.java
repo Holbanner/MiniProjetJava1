@@ -2,6 +2,9 @@ import java.util.ArrayList;
 
 
 public class Client {
+	/*
+	 * Attribut
+	 * */
 	// liste des infos sur le client
 	private String nom;
 	private String prénom;
@@ -9,7 +12,10 @@ public class Client {
 	private int numero;
 	//liste de locations
 	private ArrayList<Location> locations;
-	
+
+	/*
+	 * Getter & Setter
+	 */
 	public String getNom() {
 		return nom;
 	}

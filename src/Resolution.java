@@ -1,7 +1,14 @@
 
 public class Resolution {
-//axes de la résolution
+	/*
+	 * Attribut
+	 * */
+	//axes de la résolution
 	private float x;
+	
+	/*
+	 * Getter & Setter
+	 */
 	public float getX() {
 		return x;
 	}

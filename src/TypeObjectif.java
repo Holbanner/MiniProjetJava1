@@ -1,7 +1,13 @@
 
 public class TypeObjectif {
-
+	/*
+	 * Attribut
+	 * */
 	private float min;
+	
+	/*
+	 * Getter & Setter
+	 */
 	public float getMin() {
 		return min;
 	}

@@ -3,6 +3,9 @@ import java.util.ArrayList;
 
 
 public class Location {
+	/*
+	 * Attribut
+	 * */
 	// dates de début et de fin de location au format date
 	private Date dateDebut;
 	private Date dateFin;
@@ -11,6 +14,9 @@ public class Location {
 	//liste d'articles
 	private ArrayList<Article> articles;
 
+	/*
+	 * Getter & Setter
+	 */
 	public Date getDateDebut() {
 		return dateDebut;
 	}
