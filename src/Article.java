@@ -5,7 +5,7 @@ public class Article {
 	 * */
 	
 	//reference du produit. Numéro de produit
-	private int ref;
+	private String ref;
 	//Marque du constructeur
 	private String marque;
 	//Nom du produit
@@ -42,11 +42,14 @@ public class Article {
 	public void setMarque(String marque) {
 		this.marque = marque;
 	}
-	public int getRef() {
+	public String getRef() {
 		return ref;
 	}
-	public void setRef(int ref) {
+	public void setRef(String ref) {
 		this.ref = ref;
 	}
+	
+	//Methodes
+	
 
 }
