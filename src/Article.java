@@ -3,13 +3,14 @@ public class Article {
 	/*
 	 * Attribut
 	 * */
-	//reference du produit. Numéro de produit
-	private int ref;
-	//Marque du constructeur
+	
+	// reference du produit. Numéro de produit
+	private String ref;
+	// Marque du constructeur
 	private String marque;
-	//Nom du produit
+	// Nom du produit
 	private String intitulé;
-	//Prix de la location du produit par jour de location
+	// Prix de la location du produit par jour de location
 	private float prixParJour;
 	// Produit diponnible en stock
 	private int disponnibilité;
@@ -48,4 +49,6 @@ public class Article {
 		this.ref = ref;
 	}
 
+	
+	
 }
