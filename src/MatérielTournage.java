@@ -1,9 +1,10 @@
 
 public class MatérielTournage extends Article{
+
 	/*
 	 * Attribut
 	 * */
-	//résolution défini par l'axe X et Y
+	//taille défini par l'axe X et Y
 	private int x;
 	private int y;
 	
@@ -23,4 +24,22 @@ public class MatérielTournage extends Article{
 		this.y = y;
 	}
 	
+	//contructor
+	public MatérielTournage(String ref, String marque, String intitulé,
+			float prixParJour, int disponnibilité, int x, int y) {
+		super(ref, marque, intitulé, prixParJour, disponnibilité);
+		this.setX(x);
+		this.setY(y);
+		// TODO Auto-generated constructor stub
+	}
+	
+	//méthodes
+	
+	public String toString(){
+		String res="";
+		res += super.toString()+"\n";
+		res += "		Dimension : largeur =>"+this.getX() + " hauteur => " + this.getY() + "\n";
+
+		return res;
+	}
 }

@@ -66,6 +66,19 @@ public class Article {
 		this.prixParJour = prixParJour;
 		this.disponnibilité = disponnibilité;
 	}
-
+	
 	// Methodes
+	/**
+	 * Retourne les infos de l'article
+	 * @return String les infos
+	 */
+	public String toString() {
+		String res = "			Référence : "+this.getRef()+"\n";
+		res += "			Intitulé : "+this.getIntitulé()+"\n";
+		res += "			Marque : "+this.getMarque()+"\n";
+		res += "			Prix par jour : "+this.getPrixParJour()+"\n";
+		res += "			Nombre disponible : "+this.getDisponnibilité()+"\n";
+		return res;
+	}
+
 }

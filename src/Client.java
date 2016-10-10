@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class Client {
 	/*
@@ -86,5 +87,18 @@ public class Client {
 	// ajouter un location dans la liste
 	public void supprimerLocation(Location location) {
 		locations.remove(location);
+	}
+	/**
+	 * Affiche les locations en cours dans la console
+	 */
+	public void AfficherLocationsEnCours(){
+		//pour chaque location 
+		for (Location loc : this.locations){
+			//si la date de début est antérieur à la date actuel et la date de fin postérieur à maintenant
+			if(	((loc.getDateDebut().compareTo(new GregorianCalendar())) < 1) && ((loc.getDateFin().compareTo(new GregorianCalendar())) > 0 ) ){
+				//afficher la location
+				System.out.println(loc.toString());
+			}
+		}
 	}
 }
