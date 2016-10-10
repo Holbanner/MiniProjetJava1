@@ -12,7 +12,7 @@ public class Article {
 	private String intitulé;
 	// Prix de la location du produit par jour de location
 	private float prixParJour;
-	// Produits diponnible en stock
+	// Produit diponnible en stock
 	private int disponnibilité;
 
 	/*
