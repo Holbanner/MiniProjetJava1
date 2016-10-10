@@ -37,7 +37,12 @@ public class Magasin {
 		articles = Articles;
 	}
 
-	// constructeur, avec deux possibilités. Le second est une surcharge du
+	/** 
+	 *  constructeur, avec deux possibilités. Le second est une surcharge du
+	 * @param nom
+	 * @param clients
+	 * @param articles
+	 */
 	// premier permettant d'ajouter des clients et des articles un par un au
 	// besoin
 
@@ -57,22 +62,34 @@ public class Magasin {
 
 	// Methodes
 
-	// ajouter un client dans la liste
+	/** 
+	 *  ajouter un client dans la liste
+	 * @param client  
+	 */
 	public void ajouterClient(Client client) {
 		clients.add(client);
 	}
 
-	// Supprimer un client dans la liste
+	/** 
+	 * Supprimer un client dans la liste
+	 * @param client
+	 */
 	public void supprimerClient(Client client) {
 		clients.remove(client);
 	}
 
-	// ajouter un Article dans la liste
+	/** 
+	 *  ajouter un Article dans la liste
+	 * @param article
+	 */
 	public void ajouterArticle(Article article) {
 		articles.add(article);
 	}
 
-	// Supprimer un Article dans la liste
+	/** 
+	 *  Supprimer un Article dans la liste
+	 * @param article
+	 */
 	public void supprimerArticle(Article article) {
 		articles.remove(article);
 	}

@@ -58,7 +58,14 @@ public class Article {
 		this.ref = ref;
 	}
 
-	// Constructeur
+	/** 
+	 *  Constructeur
+	 * @param ref
+	 * @param marque
+	 * @param intitulé
+	 * @param prixParJour
+	 * @param disponnibilité
+	 */
 	public Article(String ref, String marque, String intitulé, float prixParJour, int disponnibilité) {
 		super();
 		this.ref = ref;

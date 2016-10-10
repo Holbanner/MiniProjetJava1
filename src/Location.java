@@ -1,4 +1,5 @@
 import java.sql.Date;
+import java.lang.Object;
 import java.util.ArrayList;
 
 public class Location {
@@ -48,7 +49,13 @@ public class Location {
 		this.articles = articles;
 	}
 
-	// constructeur, avec deux possibilités. Le second est une surcharge du
+	/** 
+	 *  constructeur, avec deux possibilités. Le second est une surcharge du
+	 * @param dateDebut
+	 * @param dateFin
+	 * @param montant
+	 * @param articles
+	 */
 	// premier permettant d'ajouter des articles un par un au besoin
 
 	public Location(Date dateDebut, Date dateFin, float montant, ArrayList<Article> articles) {
@@ -71,14 +78,29 @@ public class Location {
 
 	// methodes
 
-	// ajouter un Article dans la liste
+	/** 
+	 * calculer montant Location
+	 */
+	public void calculerMontant(){
+		
+	}
+		
+	/** 
+	 *  ajouter un Article dans la liste
+	 * @param article
+	 */
 	public void ajouterArticle(Article article) {
 		articles.add(article);
 	}
 
-	// Supprimer un Article dans la liste
+	/** 
+	 *  Supprimer un Article dans la liste
+	 * @param article
+	 */
 	public void supprimerArticle(Article article) {
 		articles.remove(article);
 	}
+	
+	
 
 }

@@ -55,7 +55,14 @@ public class Client {
 		this.locations = locations;
 	}
 
-	// constructeur, avec deux possibilités. Le second est une surcharge du
+	/** 
+	 *  constructeur, avec deux possibilités. Le second est une surcharge du
+	 * @param nom
+	 * @param prénom
+	 * @param coordonné
+	 * @param numero
+	 * @param locations
+	 */
 	// premier permettant d'ajouter des Locations une par une au besoin
 
 	public Client(String nom, String prénom, String coordonné, int numero, ArrayList<Location> locations) {
@@ -77,13 +84,20 @@ public class Client {
 	}
 
 	// methode
-
-	// ajouter un location dans la liste
+	//
+	
+	/** 
+	 *  ajouter un location dans la liste
+	 * @param location
+	 */
 	public void ajouterLocation(Location location) {
 		locations.add(location);
 	}
 
-	// ajouter un location dans la liste
+	/**
+	 *  ajouter un location dans la liste
+	 * @param location
+	 */
 	public void supprimerLocation(Location location) {
 		locations.remove(location);
 	}

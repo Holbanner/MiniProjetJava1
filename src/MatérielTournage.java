@@ -23,4 +23,22 @@ public class MatérielTournage extends Article{
 		this.y = y;
 	}
 	
+	/** 
+	 * constructeur
+	 * @param ref
+	 * @param marque
+	 * @param intitulé
+	 * @param prixParJour
+	 * @param disponnibilité
+	 * @param x
+	 * @param y
+	 */
+	public MatérielTournage(String ref, String marque, String intitulé, float prixParJour, int disponnibilité, int x,
+			int y) {
+		super(ref, marque, intitulé, prixParJour, disponnibilité);
+		this.x = x;
+		this.y = y;
+	}
+	
+	
 }
