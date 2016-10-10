@@ -3,7 +3,7 @@ public class MatérielTournage extends Article{
 	/*
 	 * Attribut
 	 * */
-	//résolution défini par l'axe X et Y
+	//taille défini par l'axe X et Y
 	private int x;
 	private int y;
 	

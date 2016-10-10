@@ -1,8 +1,10 @@
 
-public class DispositifAcquisition extends Article {
+public class DispositifAcquisition extends Article{
 	/*
 	 * Attribut
-	 */
+	 * */
+	
+
 	private int nbPixel;
 	private TypeObjectif typeObjectif;
 	private Resolution resolution;
@@ -33,25 +35,22 @@ public class DispositifAcquisition extends Article {
 	public void setResolution(Resolution resolution) {
 		this.resolution = resolution;
 	}
-
-	/** 
-	 *  Constructeur
-	 * @param ref
-	 * @param marque
-	 * @param intitulé
-	 * @param prixParJour
-	 * @param disponnibilité
-	 * @param nbPixel
-	 * @param typeObjectif
-	 * @param resolution
-	 */
-
-	public DispositifAcquisition(String ref, String marque, String intitulé, float prixParJour, int disponnibilité,
-			int nbPixel, TypeObjectif typeObjectif, Resolution resolution) {
+	
+	//contructor
+	public DispositifAcquisition(String ref, String marque, String intitulé, float prixParJour, int disponnibilité, int nbPixel, Resolution resolution, TypeObjectif typeObjectif) {
 		super(ref, marque, intitulé, prixParJour, disponnibilité);
-		this.nbPixel = nbPixel;
-		this.typeObjectif = typeObjectif;
-		this.resolution = resolution;
+		this.setResolution(resolution);
+		this.setNbPixel(nbPixel);
+		this.setTypeObjectif(typeObjectif);
 	}
+	
+	public String toString(){
+		String res="";
+		res += super.toString()+"\n";
+		res += "		"+this.getNbPixel()+"\n";
+		res += "		"+this.getResolution().toString()+"\n";
+		res += "		"+this.getTypeObjectif().toString()+"\n";
 
+		return res;
+	}
 }

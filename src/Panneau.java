@@ -29,5 +29,14 @@ public class Panneau extends Article{
 		this.nbLed = nbLed;
 	}
 	
+	//methodes
 	
+	public String toString(){
+		String res="";
+		res += super.toString()+"\n";
+		res += "		Nombre de Led : " + this.getNbLed() + "\n";
+
+		return res;
+	
+	}
 }
