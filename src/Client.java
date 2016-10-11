@@ -10,6 +10,7 @@ import java.util.GregorianCalendar;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+
 public class Client {
 	/*
 	 * Attribut
@@ -106,7 +107,7 @@ public class Client {
 		// parcour la liste "locations" et écrit ses attributs
 		for (Location loc : this.locations) {
 			fluxSortieBinaire.writeFloat(loc.getMontant());
-			fluxSortieBinaire.writeChars(loc.getMontant());
+//			fluxSortieBinaire.writeChars(loc.getMontant());
 		}
 		// fermeture du flux
 		fluxSortieBinaire.close();

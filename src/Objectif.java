@@ -1,6 +1,11 @@
 import java.util.HashSet;
 
 public class Objectif extends Article {
+	public Objectif(String ref, String marque, String intitulé, float prixParJour, int disponnibilité) {
+		super(ref, marque, intitulé, prixParJour, disponnibilité);
+		// TODO Auto-generated constructor stub
+	}
+
 	/*
 	 * Attribut
 	 */
@@ -26,8 +31,9 @@ public class Objectif extends Article {
 		this.typeObjectif = typeObjectif;
 	}
 
-	/** 
-	 *  contructeur
+	/**
+	 * contructeur
+	 * 
 	 * @param ref
 	 * @param marque
 	 * @param intitulé

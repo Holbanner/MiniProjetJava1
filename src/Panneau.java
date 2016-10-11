@@ -1,9 +1,10 @@
-public class Panneau extends Article{
+public class Panneau extends Article {
+
 	/*
 	 * Attribut
-	 * */
+	 */
 	private int nbLed;
-	
+
 	/*
 	 * Getter & Setter
 	 */
@@ -15,8 +16,9 @@ public class Panneau extends Article{
 		this.nbLed = nbLed;
 	}
 
-	/** 
+	/**
 	 * constructeur
+	 * 
 	 * @param ref
 	 * @param marque
 	 * @param intitulé
@@ -28,15 +30,15 @@ public class Panneau extends Article{
 		super(ref, marque, intitulé, prixParJour, disponnibilité);
 		this.nbLed = nbLed;
 	}
-	
-	//methodes
-	
-	public String toString(){
-		String res="";
-		res += super.toString()+"\n";
+
+	// methodes
+
+	public String toString() {
+		String res = "";
+		res += super.toString() + "\n";
 		res += "		Nombre de Led : " + this.getNbLed() + "\n";
 
 		return res;
-	
+
 	}
 }

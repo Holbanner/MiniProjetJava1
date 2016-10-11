@@ -1,5 +1,6 @@
 
 public class MatérielTournage extends Article{
+
 	/*
 	 * Attribut
 	 * */
@@ -23,22 +24,24 @@ public class MatérielTournage extends Article{
 		this.y = y;
 	}
 	
-	/** 
-	 * constructeur
-	 * @param ref
-	 * @param marque
-	 * @param intitulé
-	 * @param prixParJour
-	 * @param disponnibilité
-	 * @param x
-	 * @param y
-	 */
-	public MatérielTournage(String ref, String marque, String intitulé, float prixParJour, int disponnibilité, int x,
-			int y) {
+
+	//contructor
+	public MatérielTournage(String ref, String marque, String intitulé,
+			float prixParJour, int disponnibilité, int x, int y) {
 		super(ref, marque, intitulé, prixParJour, disponnibilité);
-		this.x = x;
-		this.y = y;
+		this.setX(x);
+		this.setY(y);
+		// TODO Auto-generated constructor stub
 	}
 	
+	//méthodes
 	
+	public String toString(){
+		String res="";
+		res += super.toString()+"\n";
+		res += "		Dimension : largeur =>"+this.getX() + " hauteur => " + this.getY() + "\n";
+
+		return res;
+	}
+
 }

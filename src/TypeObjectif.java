@@ -21,4 +21,9 @@ public class TypeObjectif {
 		this.max = max;
 	}
 	private float max;
+	
+	//méthodes
+	public String toString(){
+		return "Type d'objectif : maximum => "+ this.getMax() + "minimum => "+ this.getMax(); 
+	}
 }

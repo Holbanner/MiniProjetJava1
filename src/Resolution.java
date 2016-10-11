@@ -22,4 +22,10 @@ public class Resolution {
 		this.y = y;
 	}
 	private float y;
+	
+	//méthodes
+	
+	public String toString(){
+		return "Résolution :  x => " + this.getX() + " y => " + this.getY();
+	}
 }
