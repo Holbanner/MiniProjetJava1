@@ -107,11 +107,9 @@ public class Client {
 	public void saveCommande(String sauvegarde, Location lSave) throws IOException {
 
 		
-		Sauvegarde.getSauvegarde(1);
+		Sauvegarde.getSauvegarde(lSave.getDateFin());
 		
 	}
-	// fermeture du flux
-	// fluxSortieBinaire.close();
 
 	/**
 	 * Methode qui permet de récuperer les commandes archivées

@@ -12,23 +12,7 @@ public class Sauvegarde {
 	private int mois;
 
 	public Sauvegarde(int mois){
-		this.setMois(mois);
-		
-//		try {
-//			FileInputStream fileIn = new FileInputStream( this.FICHIER);
-//			System.out.printf("Hallo");
-//			ObjectInputStream in = new ObjectInputStream(fileIn);
-//			loci = (Location) in.readObject();
-//			in.close();
-//			fileIn.close();
-//			return loci;
-//		} catch (IOException i) {
-//			i.printStackTrace();
-//		} catch (ClassNotFoundException c) {
-//			System.out.println("Location class not found");
-//			c.printStackTrace();
-////		}
-		
+		this.setMois(mois);		
 	}
 	
 	public static Sauvegarde getSauvegarde(int mois){

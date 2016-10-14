@@ -1,3 +1,6 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,8 +14,8 @@ public class Location implements Serializable {
 	 * Attribut
 	 */
 	// dates de début et de fin de location au format date
-	private String dateDebut;
-	private String dateFin;
+	private DateUtils dateDebut;
+	private DateUtils dateFin;
 	// montant total facturé au client
 	private float montant;
 	// liste d'articles
@@ -21,22 +24,40 @@ public class Location implements Serializable {
 	/*
 	 * Getter & Setter
 	 */
-	public String getDateDebut() {
+	public DateUtils getDateDebut() {
 		return dateDebut;
 	}
 
-	public void setDateDebut(String dateDebut) {
+	public void setDateDebut(DateUtils dateDebut) {
 		this.dateDebut = dateDebut;
 	}
+	
+	public void setDateDebut(String dateDebut) {
+		try {
+			this.dateDebut.parseDate(dateDebut, "dd/mm/yyyy");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
-	public String getDateFin() {
+	public DateUtils getDateFin() {
 		return dateFin;
 	}
 
-	public void setDateFin(String dateFin) {
+	public void setDateFin(DateUtils dateFin) {
 		this.dateFin = dateFin;
 	}
 
+	public void setDateFin(String dateFin) {
+		try {
+			this.dateFin.parseDate(dateFin, "dd/mm/yyyy");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public float getMontant() {
 		return montant;
 	}
@@ -62,7 +83,7 @@ public class Location implements Serializable {
 	 */
 	// premier permettant d'ajouter des articles un par un au besoin
 
-	public Location(String dateDebut, String dateFin, float montant, ArrayList<Article> articles) {
+	public Location(DateUtils dateDebut, DateUtils dateFin, float montant, ArrayList<Article> articles) {
 		super();
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
@@ -70,11 +91,49 @@ public class Location implements Serializable {
 		this.articles = articles;
 
 	}
+	
+	public Location(String dateDebut, String dateFin, float montant, ArrayList<Article> articles) {
+		super();
+		try {
+			this.dateDebut.parseDate(dateDebut, "dd/mm/yyyy");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.dateFin.parseDate(dateFin, "dd/mm/yyyy");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.montant = montant;
+		this.articles = articles;
 
-	public Location(String dateDebut, String dateFin, float montant) {
+	}
+
+	public Location(DateUtils dateDebut, DateUtils dateFin, float montant) {
 		super();
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
+		this.montant = montant;
+		this.articles = new ArrayList<Article>();
+
+	}
+	
+	public Location(String dateDebut, String dateFin, float montant) {
+		super();
+		try {
+			this.dateDebut.parseDate(dateDebut, "dd/mm/yyyy");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.dateFin.parseDate(dateFin, "dd/mm/yyyy");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.montant = montant;
 		this.articles = new ArrayList<Article>();
 
@@ -148,5 +207,11 @@ public class Location implements Serializable {
 		}
 		return res;
 
+	}
+
+	public int getLastMonth(){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime((Date)this.getDateFin());
+		int month = cal.get(Calendar.MONTH);
 	}
 }
