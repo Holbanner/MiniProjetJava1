@@ -106,19 +106,9 @@ public class Client {
 	 */
 	public void saveCommande(String sauvegarde, Location lSave) throws IOException {
 
-		try {
-			for (Location loc : this.locations) {
-				FileOutputStream fileOut = new FileOutputStream(sauvegarde, true);
-//				System.out.printf("BOUCLE ");
-				ObjectOutputStream out = new ObjectOutputStream(fileOut);
-				out.writeObject(lSave);
-				out.close();
-				fileOut.close();
-//				System.out.printf("Serialized data is saved in " + sauvegarde);
-			}
-		} catch (IOException i) {
-			i.printStackTrace();
-		}
+		
+		Sauvegarde.getSauvegarde(1);
+		
 	}
 	// fermeture du flux
 	// fluxSortieBinaire.close();

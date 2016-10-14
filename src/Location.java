@@ -1,11 +1,10 @@
-import java.sql.Date;
 import java.util.GregorianCalendar;
-import java.lang.Object;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.GregorianCalendar;
 import java.io.*;
+
+import org.apache.commons.lang3.time.DateUtils;
 
 public class Location implements Serializable {
 	/*
