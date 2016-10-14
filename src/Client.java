@@ -1,15 +1,17 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 
 public class Client {
 	/*
@@ -102,16 +104,24 @@ public class Client {
 	 * @param sauvegarde
 	 * @throws IOException
 	 */
-	public void saveCommande(String sauvegarde) throws IOException {
-		DataOutputStream fluxSortieBinaire = new DataOutputStream(new FileOutputStream(sauvegarde));
-		// parcour la liste "locations" et écrit ses attributs
-		for (Location loc : this.locations) {
-			fluxSortieBinaire.writeFloat(loc.getMontant());
-//			fluxSortieBinaire.writeChars(loc.getMontant());
+	public void saveCommande(String sauvegarde, Location lSave) throws IOException {
+
+		try {
+			for (Location loc : this.locations) {
+				FileOutputStream fileOut = new FileOutputStream(sauvegarde, true);
+//				System.out.printf("BOUCLE ");
+				ObjectOutputStream out = new ObjectOutputStream(fileOut);
+				out.writeObject(lSave);
+				out.close();
+				fileOut.close();
+//				System.out.printf("Serialized data is saved in " + sauvegarde);
+			}
+		} catch (IOException i) {
+			i.printStackTrace();
 		}
-		// fermeture du flux
-		fluxSortieBinaire.close();
 	}
+	// fermeture du flux
+	// fluxSortieBinaire.close();
 
 	/**
 	 * Methode qui permet de récuperer les commandes archivées
@@ -119,12 +129,25 @@ public class Client {
 	 * @param sauvegarde
 	 * @throws IOException
 	 */
-	public float loadCommande(String sauvegarde) throws IOException {
-		// Lit le fichier binaire généré par saveCommande
-		DataInputStream fluxEBinaire = new DataInputStream(new FileInputStream("sauvegarde.dat"));
-		Float Opt = fluxEBinaire.readFloat();
-		fluxEBinaire.close();
-		return Opt;
+	public Location loadCommande(String sauvegarde) throws IOException {
+		Location loci = null;
+//		for (Location loc : this.locations) {
+			try {
+				FileInputStream fileIn = new FileInputStream(sauvegarde);
+				System.out.printf("Hallo");
+				ObjectInputStream in = new ObjectInputStream(fileIn);
+				loci = (Location) in.readObject();
+				in.close();
+				fileIn.close();
+				return loci;
+			} catch (IOException i) {
+				i.printStackTrace();
+			} catch (ClassNotFoundException c) {
+				System.out.println("Location class not found");
+				c.printStackTrace();
+//			}
+		}
+		return loci;
 	}
 
 	/**
@@ -144,43 +167,52 @@ public class Client {
 	public void supprimerLocation(Location location) {
 		locations.remove(location);
 	}
+
 	/**
 	 * Affiche les locations en cours dans la console
 	 */
-	public void AfficherLocationsEnCours(){
-		//pour chaque location 
-		for (Location loc : this.locations){
-			//si la date de début est antérieur à la date actuel et la date de fin postérieur à maintenant
-			if(	((loc.getDateDebut().compareTo(new GregorianCalendar())) < 1) && ((loc.getDateFin().compareTo(new GregorianCalendar())) > 0 ) ){
-				//afficher la location
-				System.out.println(loc.toString());
-			}
-		}
-	}
+	// public void AfficherLocationsEnCours(){
+	// //pour chaque location
+	// for (Location loc : this.locations){
+	// //si la date de début est antérieur à la date actuel et la date de fin
+	// postérieur à maintenant
+	// if( ((loc.getDateDebut().compareTo(new GregorianCalendar())) < 1) &&
+	// ((loc.getDateFin().compareTo(new GregorianCalendar())) > 0 ) ){
+	// //afficher la location
+	// System.out.println(loc.toString());
+	// }
+	// }
+	// }
 
 	public static void main(String[] args) {
+
 		Article A1 = new Article("12", "rebook", "tropcool", 12, 7);
+		Article A2 = new Article("19", "claf", "outi", 12, 7);
 		ArrayList<Article> Ar1 = new ArrayList<Article>();
+		ArrayList<Article> Ar2 = new ArrayList<Article>();
 		Ar1.add(A1);
-		Location l1 = new Location(new GregorianCalendar(2012, Calendar.FEBRUARY, 17),
-				new GregorianCalendar(2012, Calendar.FEBRUARY, 17), 123, Ar1);
+		Ar2.add(A2);
+		Location l1 = new Location("17/02/2007", "16/03/2007", 100, Ar1);
+		Location l2 = new Location("17/02/2007", "16/03/2007", 100, Ar2);
 
 		ArrayList<Location> ArL1 = new ArrayList<Location>();
 		ArL1.add(l1);
+		ArL1.add(l2);
 		Client c1 = new Client("jean", "caca", "pipi", 129, ArL1);
 
 		try {
-			c1.saveCommande("sauvegarde.dat");
+			c1.saveCommande("sauvegarde.dat", l1);
+			c1.saveCommande("sauvegarde.dat", l2);
 		} catch (IOException e) {
 			System.out.println("Error d'E/S" + e.getMessage());
 		}
 
 		try {
-			Float yo = c1.loadCommande("sauvegarde.dat");
-			System.out.println(yo);
+			Location locloc = c1.loadCommande("sauvegarde.dat");
+			System.out.println(locloc);
 		} catch (IOException e) {
 			System.out.println("Error d'E/S" + e.getMessage());
 		}
-		
+
 	}
 }

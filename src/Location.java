@@ -5,14 +5,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
+import java.io.*;
 
-public class Location {
+public class Location implements Serializable {
 	/*
 	 * Attribut
 	 */
 	// dates de début et de fin de location au format date
-	private GregorianCalendar dateDebut;
-	private GregorianCalendar dateFin;
+	private String dateDebut;
+	private String dateFin;
 	// montant total facturé au client
 	private float montant;
 	// liste d'articles
@@ -21,19 +22,19 @@ public class Location {
 	/*
 	 * Getter & Setter
 	 */
-	public GregorianCalendar getDateDebut() {
+	public String getDateDebut() {
 		return dateDebut;
 	}
 
-	public void setDateDebut(GregorianCalendar dateDebut) {
+	public void setDateDebut(String dateDebut) {
 		this.dateDebut = dateDebut;
 	}
 
-	public GregorianCalendar getDateFin() {
+	public String getDateFin() {
 		return dateFin;
 	}
 
-	public void setDateFin(GregorianCalendar dateFin) {
+	public void setDateFin(String dateFin) {
 		this.dateFin = dateFin;
 	}
 
@@ -62,7 +63,7 @@ public class Location {
 	 */
 	// premier permettant d'ajouter des articles un par un au besoin
 
-	public Location(GregorianCalendar dateDebut, GregorianCalendar dateFin, float montant, ArrayList<Article> articles) {
+	public Location(String dateDebut, String dateFin, float montant, ArrayList<Article> articles) {
 		super();
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
@@ -71,7 +72,7 @@ public class Location {
 
 	}
 
-	public Location(GregorianCalendar dateDebut, GregorianCalendar dateFin, float montant) {
+	public Location(String dateDebut, String dateFin, float montant) {
 		super();
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
