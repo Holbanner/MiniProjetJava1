@@ -111,21 +111,13 @@ public class Client {
 	 * @param sauvegarde
 	 * @throws IOException
 	 */
-	// public void saveCommande(String sauvegarde, Location lSave) throws
-	// IOException {
-	//
-	//
-	// Sauvegarde.getSauvegarde(lSave.getDateFin());
-	//
-	// }
-<<<<<<< HEAD
+	 public void saveCommande(String sauvegarde, Location lSave){
 
 		SimpleDateFormat sdf = new SimpleDateFormat("MM");
 		Sauvegarde.getSauvegarde(lSave.getDateFin().get(Calendar.MONTH));
 		
 	}
-=======
->>>>>>> branch 'master' of https://github.com/Holbanner/MiniProjetJava1.git
+
 
 	/**
 	 * Methode qui permet de récuperer les commandes archivées
