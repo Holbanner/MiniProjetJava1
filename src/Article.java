@@ -60,11 +60,11 @@ public class Article implements Serializable{
 
 	/** 
 	 *  Constructeur
-	 * @param ref
-	 * @param marque
-	 * @param intitulé
-	 * @param prixParJour
-	 * @param disponnibilité
+	 * @param ref : référence de l'article
+	 * @param marque : marque de l'article
+	 * @param intitulé : nom de l'article
+	 * @param prixParJour : prix à la location par jour
+	 * @param disponnibilité : quantité disponnible
 	 */
 
 	public Article(String ref, String marque, String intitulé, float prixParJour, int disponnibilité) {
@@ -79,7 +79,7 @@ public class Article implements Serializable{
 	// Methodes
 	/**
 	 * Retourne les infos de l'article
-	 * @return String les infos
+	 * @return String :les infos
 	 */
 	public String toString() {
 		String res = "			Référence : "+this.getRef()+"\n";
