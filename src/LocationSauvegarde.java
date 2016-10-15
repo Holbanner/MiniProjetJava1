@@ -1,9 +1,11 @@
+import java.util.Calendar;
+
 
 public class LocationSauvegarde extends Location{
 
 	private Client client;
 
-	public LocationSauvegarde(String dateDebut, String dateFin, float montant) {
+	public LocationSauvegarde(Calendar dateDebut, Calendar dateFin, float montant) {
 		super(dateDebut, dateFin, montant);
 		// TODO Auto-generated constructor stub
 	}

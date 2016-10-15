@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Magasin {
 	/*
@@ -9,6 +10,8 @@ public class Magasin {
 	private ArrayList<Client> clients;
 	// liste d'article
 	private ArrayList<Article> articles;
+	//utiliser pour le menu afin de récuperer les input
+	private Scanner input = new Scanner(System.in);
 
 	/*
 	 * Getter & Setter
@@ -92,6 +95,72 @@ public class Magasin {
 	 */
 	public void supprimerArticle(Article article) {
 		articles.remove(article);
+	}
+	
+	/**
+	 * methode permetant de quitter le menu
+	 */
+	private void exit() {
+		System.out.println("Exiting...");
+		System.exit(1);
+	}
+	
+	/**
+	 * créer et afficher le menu principale
+	 */
+	public void menuP() {
+		System.out.println("\n\n-------------------------------------");
+		System.out.println("|    Bienvenu dans le gestionnaire  |");
+		System.out.println("|-----------------------------------|");
+		System.out.println("|                                   |");
+		System.out.println("|          Menu principal:          |");
+		System.out.println("| 		 	----------              |");
+		System.out.println("|                                   |");
+		System.out.println("| 1.) Lister les articles           |");
+		System.out.println("| 2.) Enregistrer une location      |");
+		System.out.println("| 3.) Afficher les locations client |");
+		System.out.println("| 4.) Terminer une location         |");
+		System.out.println("| 5.) Calculer la recette mensuel   |");
+		System.out.println("| 6.) Quitter!                      |");
+		System.out.println("|                             v 1.0 |");
+		System.out.println("-------------------------------------");
+
+		int selection = input.nextInt();
+		input.nextLine();
+		// Chaque case correspond à une selection
+		switch (selection) {
+		case 1:
+			//ici faire la magie choix 1 ex: client.sauvegarde();
+			System.out.println("choix 1");
+			break;
+		case 2:
+			//choix deux la vie de moi
+			System.out.println("choix 2");
+			break;
+		case 3:
+			System.out.println("choix 3");
+			break;
+		case 4:
+			System.out.println("choix 4");
+			break;
+		case 5:
+			System.out.println("choix 5");
+			break;
+		case 6:
+			//pour faire appel à la méthode exit qui ferme le programme
+			this.exit();
+			break;
+		default:
+			// quand on choisie pas un bon chiffre
+			System.out.println("Selection invalide.");
+			break;
+		}
+	}
+	
+	public static void main(String[] args) {
+		 Magasin magasin = new Magasin("carouf");
+		  while (true)
+		    magasin.menuP();
 	}
 
 }

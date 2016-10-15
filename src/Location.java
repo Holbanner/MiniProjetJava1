@@ -13,10 +13,10 @@ public class Location implements Serializable {
 	/*
 	 * Attribut
 	 */
-	// dates de début et de fin de location au format date
-	private DateUtils dateDebut;
-	private DateUtils dateFin;
-	// montant total facturé au client
+	// dates de dï¿½but et de fin de location au format date
+	private Calendar  dateDebut;
+	private Calendar  dateFin;
+	// montant total facturï¿½ au client
 	private float montant;
 	// liste d'articles
 	private ArrayList<Article> articles;
@@ -24,40 +24,22 @@ public class Location implements Serializable {
 	/*
 	 * Getter & Setter
 	 */
-	public DateUtils getDateDebut() {
+	public Calendar getDateDebut() {
 		return dateDebut;
 	}
 
-	public void setDateDebut(DateUtils dateDebut) {
+	public void setDateDebut(Calendar dateDebut) {
 		this.dateDebut = dateDebut;
 	}
-	
-	public void setDateDebut(String dateDebut) {
-		try {
-			this.dateDebut.parseDate(dateDebut, "dd/mm/yyyy");
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
-	public DateUtils getDateFin() {
+	public Calendar getDateFin() {
 		return dateFin;
 	}
 
-	public void setDateFin(DateUtils dateFin) {
+	public void setDateFin(Calendar dateFin) {
 		this.dateFin = dateFin;
 	}
 
-	public void setDateFin(String dateFin) {
-		try {
-			this.dateFin.parseDate(dateFin, "dd/mm/yyyy");
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
 	public float getMontant() {
 		return montant;
 	}
@@ -74,8 +56,9 @@ public class Location implements Serializable {
 		this.articles = articles;
 	}
 
-	/** 
-	 *  constructeur, avec deux possibilités. Le second est une surcharge du
+	/**
+	 * constructeur, avec deux possibilitï¿½s. Le second est une surcharge du
+	 * 
 	 * @param dateDebut
 	 * @param dateFin
 	 * @param montant
@@ -83,35 +66,17 @@ public class Location implements Serializable {
 	 */
 	// premier permettant d'ajouter des articles un par un au besoin
 
-	public Location(DateUtils dateDebut, DateUtils dateFin, float montant, ArrayList<Article> articles) {
+	public Location(Calendar dateDebut, Calendar dateFin, float montant,
+			ArrayList<Article> articles) {
 		super();
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.montant = montant;
-		this.articles = articles;
-
-	}
-	
-	public Location(String dateDebut, String dateFin, float montant, ArrayList<Article> articles) {
-		super();
-		try {
-			this.dateDebut.parseDate(dateDebut, "dd/mm/yyyy");
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			this.dateFin.parseDate(dateFin, "dd/mm/yyyy");
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		this.montant = montant;
-		this.articles = articles;
+		this.articles = articles; 
 
 	}
 
-	public Location(DateUtils dateDebut, DateUtils dateFin, float montant) {
+	public Location(Calendar dateDebut, Calendar dateFin, float montant) {
 		super();
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
@@ -119,99 +84,91 @@ public class Location implements Serializable {
 		this.articles = new ArrayList<Article>();
 
 	}
-	
-	public Location(String dateDebut, String dateFin, float montant) {
-		super();
-		try {
-			this.dateDebut.parseDate(dateDebut, "dd/mm/yyyy");
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			this.dateFin.parseDate(dateFin, "dd/mm/yyyy");
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		this.montant = montant;
-		this.articles = new ArrayList<Article>();
-
-	}
-
 	// methodes
 
-	/** 
+	/**
 	 * calculer montant Location
 	 */
-	public void calculerMontant(){
+	public float calculerMontant() {
+
+		long millisA = this.getDateDebut().getTimeInMillis();
+        long millisB = this.getDateFin().getTimeInMillis();
+
+        long difMillis = millisB -millisA;
+
+        float resultat;
+        float prix = 0;
+        
+        long difEnJour = difMillis / (24*60*60*1000);
+        resultat = (int) difEnJour;
+        
+        for (Article article : this.getArticles()){
+        	prix += article.getPrixParJour();
+        }
+        return resultat*prix;
 		
 	}
-		
-	/** 
-	 *  ajouter un Article dans la liste
+
+	/**
+	 * ajouter un Article dans la liste
+	 * 
 	 * @param article
 	 */
 	public void ajouterArticle(Article article) {
 		articles.add(article);
 	}
 
-	/** 
-	 *  Supprimer un Article dans la liste
+	/**
+	 * Supprimer un Article dans la liste
+	 * 
 	 * @param article
 	 */
 	public void supprimerArticle(Article article) {
 		articles.remove(article);
 	}
-	
-	
 
 	/**
-	 * Retourne la liste d'articles de la location en triant par l'attribut désiré 
-	 * @param arg argument de tri
+	 * Retourne la liste d'articles de la location en triant par l'attribut
+	 * dï¿½sirï¿½
+	 * 
+	 * @param arg
+	 *            argument de tri
 	 */
-	public void getArticlesBy(String arg){
+	public void getArticlesBy(String arg) {
 		Comparator comparator;
 		switch (arg) {
-		case "marque":	
+		case "marque":
 			comparator = new ArticleMarqueComparator();
-		break;
-			
-		case "intitulé":
+			break;
+
+		case "intitulï¿½":
 			comparator = new ArticleIntituleComparator();
-		break;
-		
+			break;
+
 		case "prix":
 			comparator = new ArticlePrixComparator();
-		break;
+			break;
 
-		case "référence":
+		case "rï¿½fï¿½rence":
 			comparator = new ArticleReferenceComparator();
-		break;
-
+			break;
 
 		default:
 			comparator = new ArticleReferenceComparator();
-		break;
+			break;
 		}
 		Collections.sort(this.articles, comparator);
 	}
-	
-	public String toString(){
-		String res="Location : "+"\n";
-		res += "	Date début : " + this.dateDebut.toString()+"\n";
-		res += "	Date début : " + this.dateFin.toString()+"\n";
-		res += "	Articles loué : " + this.dateDebut.toString()+"\n";
-		for (Article article : this.articles){
-			res += article.toString()+"\n"+"\n";
+
+	public String toString() {
+		String res = "Location : " + "\n";
+		res += "	Date dï¿½but : " + this.dateDebut.toString() + "\n";
+		res += "	Date dï¿½but : " + this.dateFin.toString() + "\n";
+		res += "	Articles louï¿½ : " + this.dateDebut.toString() + "\n";
+		for (Article article : this.articles) {
+			res += article.toString() + "\n" + "\n";
 		}
 		return res;
 
-	}
-
-	public int getLastMonth(){
-		Calendar cal = Calendar.getInstance();
-		cal.setTime((Date)this.getDateFin());
-		int month = cal.get(Calendar.MONTH);
 	}
 }
