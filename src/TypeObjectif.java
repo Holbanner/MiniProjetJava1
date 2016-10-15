@@ -3,27 +3,32 @@ public class TypeObjectif {
 	/*
 	 * Attribut
 	 * */
-	private float min;
+	private int min;
 	
 	/*
 	 * Getter & Setter
 	 */
-	public float getMin() {
+	public int getMin() {
 		return min;
 	}
-	public void setMin(float min) {
+	public void setMin(int min) {
 		this.min = min;
 	}
-	public float getMax() {
+	public int getMax() {
 		return max;
 	}
-	public void setMax(float max) {
+	public void setMax(int max) {
 		this.max = max;
 	}
-	private float max;
+	private int max;
+	
+	public TypeObjectif(int min, int max){
+		this.setMax(max);
+		this.setMin(min);
+	}
 	
 	//méthodes
 	public String toString(){
-		return "Type d'objectif : maximum => "+ this.getMax() + "minimum => "+ this.getMax(); 
+		return "	maximum => "+ this.getMax() + "minimum => "+ this.getMax(); 
 	}
 }

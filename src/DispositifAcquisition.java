@@ -59,8 +59,8 @@ public class DispositifAcquisition extends Article{
 	 */
 	public String toString(){
 		String res="";
-		res += super.toString()+"\n";
-		res += "		"+this.getNbPixel()+"\n";
+		res += super.toString();
+		res += "			Nombre de pixel : "+this.getNbPixel()+"\n";
 		res += "		"+this.getResolution().toString()+"\n";
 		res += "		"+this.getTypeObjectif().toString()+"\n";
 

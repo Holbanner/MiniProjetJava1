@@ -48,5 +48,15 @@ public class Objectif extends Article {
 		this.typeObjectif = typeObjectif;
 		this.dispositifAcquisitions = dispositifAcquisitions;
 	}
+	
+	public String toString() {
+		String res = "";
+		res += super.toString() + "\n";
+		res += "		Type objectif : " + this.typeObjectif.toString() + "\n";
+
+
+		return res;
+
+	}
 
 }

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Magasin {
@@ -135,7 +136,7 @@ public class Magasin {
 		switch (selection) {
 		case 1:
 			//ici faire la magie choix 1 ex: client.sauvegarde();
-			System.out.println("choix 1");
+			menuP1();
 			break;
 		case 2:
 			//choix deux la vie de moi
@@ -162,10 +163,70 @@ public class Magasin {
 		}
 	}
 	
+	public void menuP1() {
+		System.out.println("\n\n-------------------------------------");
+		System.out.println("|        Liste des Articles         |");
+		System.out.println("|-----------------------------------|");
+		System.out.println("|                                   |");
+		System.out.println("| 1.) Trier par référence           |");
+		System.out.println("| 2.) Trier par marque              |");
+		System.out.println("| 3.) Trier par intitulé            |");
+		System.out.println("| 4.) Trier par prix par jour       |");
+		System.out.println("| 5.) Retour                        |");
+		System.out.println("|                             v 1.0 |");
+		System.out.println("-------------------------------------");
+
+		String selection = input.next();
+		input.nextLine();
+		// Chaque case correspond à une selection
+		switch (selection) {
+		case "1":
+			//ici faire la magie choix 1 ex: client.sauvegarde();
+			AfficherArticlesReference();
+			System.out.println("Appuyer sur une touche pour continuer...");
+			input.nextLine();
+			menuP1();
+			break;
+		case "2":
+			//choix deux la vie de moi
+			AfficherArticlesMarque();
+			System.out.println("Appuyer sur une touche pour continuer...");
+			input.nextLine();
+			menuP1();
+			break;
+		case "3":
+			AfficherArticlesIntitule();
+			System.out.println("Appuyer sur une touche pour continuer...");
+			input.nextLine();
+			menuP1();
+			break;
+		case "4":
+			AfficherArticlesPrix();
+			System.out.println("Appuyer sur une touche pour continuer...");
+			input.nextLine();
+			menuP1();
+			break;
+		case "5":
+			menuP();
+			break;
+		default:
+			// quand on choisie pas un bon chiffre
+			System.out.println("Selection invalide.");
+			menuP1();
+			break;
+		}
+	}
+	
 	public static void main(String[] args) {
-		 Magasin magasin = new Magasin("carouf");
-		  while (true)
-		    magasin.menuP();
+		ArrayList<Article> articles = new ArrayList<Article>();
+		articles.add(new DispositifAcquisition("A123", "Adiddas", "EnormeAppareil", 20, 20, 2000000, new Resolution(1000, 2000), new TypeObjectif(100,500)));
+		articles.add(new Fond("A1253", "Adiddas", "LeFondvert", 1, 10, 100, 200));
+
+		Magasin magasin = new Magasin("carouf");
+		magasin.setArticles(articles);
+			while (true){
+				magasin.menuP();
+			}
 	}
 	
 	public void AfficherClients(){
@@ -175,5 +236,30 @@ public class Magasin {
 			i++;
 		}
 	}
+	
+	public void AfficherArticlesIntitule(){
+		Collections.sort(this.articles, new ArticleIntituleComparator());
+		AfficherTousLesArticles();
+	}
+	
+	public void AfficherArticlesMarque(){
+		Collections.sort(this.articles, new ArticleMarqueComparator());
+		AfficherTousLesArticles();
+	}
+	
+	public void AfficherArticlesPrix(){
+		Collections.sort(this.articles, new ArticlePrixComparator());
+		AfficherTousLesArticles();
+	}
+	
+	public void AfficherArticlesReference(){
+		Collections.sort(this.articles, new ArticleReferenceComparator());	
+		AfficherTousLesArticles();
+	}
 
+	public void AfficherTousLesArticles(){
+		for(Article article : this.getArticles()){
+			System.out.println(article.toString());
+		}
+	}
 }
