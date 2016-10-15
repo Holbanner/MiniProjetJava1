@@ -81,6 +81,10 @@ public class Magasin {
 		clients.remove(client);
 	}
 
+	public Client getClient(int index){
+		return this.clients.get(index);
+	}
+	
 	/** 
 	 *  ajouter un Article dans la liste
 	 * @param article
