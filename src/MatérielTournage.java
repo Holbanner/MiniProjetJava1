@@ -51,8 +51,8 @@ public class MatérielTournage extends Article {
 	 */
 	public String toString() {
 		String res = "";
-		res += super.toString() + "\n";
-		res += "		Dimension : largeur =>" + this.getX() + " hauteur => " + this.getY() + "\n";
+		res += super.toString();
+		res += "			Dimension : largeur =>" + this.getX() + " hauteur => " + this.getY() + "\n";
 
 		return res;
 	}

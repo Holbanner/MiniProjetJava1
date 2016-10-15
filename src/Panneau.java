@@ -35,7 +35,7 @@ public class Panneau extends Article {
 
 	public String toString() {
 		String res = "";
-		res += super.toString() + "\n";
+		res += super.toString();
 		res += "		Nombre de Led : " + this.getNbLed() + "\n";
 
 		return res;

@@ -183,26 +183,26 @@ public class Magasin {
 		case "1":
 			//ici faire la magie choix 1 ex: client.sauvegarde();
 			AfficherArticlesReference();
-			System.out.println("Appuyer sur une touche pour continuer...");
+			System.out.println("Appuyer sur une entrer pour continuer...");
 			input.nextLine();
 			menuP1();
 			break;
 		case "2":
 			//choix deux la vie de moi
 			AfficherArticlesMarque();
-			System.out.println("Appuyer sur une touche pour continuer...");
+			System.out.println("Appuyer sur une entrer pour continuer...");
 			input.nextLine();
 			menuP1();
 			break;
 		case "3":
 			AfficherArticlesIntitule();
-			System.out.println("Appuyer sur une touche pour continuer...");
+			System.out.println("Appuyer sur une entrer pour continuer...");
 			input.nextLine();
 			menuP1();
 			break;
 		case "4":
 			AfficherArticlesPrix();
-			System.out.println("Appuyer sur une touche pour continuer...");
+			System.out.println("Appuyer sur une entrer pour continuer...");
 			input.nextLine();
 			menuP1();
 			break;
@@ -224,9 +224,9 @@ public class Magasin {
 
 		Magasin magasin = new Magasin("carouf");
 		magasin.setArticles(articles);
-			while (true){
-				magasin.menuP();
-			}
+		while (true){
+			magasin.menuP();
+		}
 	}
 	
 	public void AfficherClients(){
