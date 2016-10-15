@@ -85,7 +85,7 @@ public class Article implements Serializable{
 		String res = "			Référence : "+this.getRef()+"\n";
 		res += "			Intitulé : "+this.getIntitulé()+"\n";
 		res += "			Marque : "+this.getMarque()+"\n";
-		res += "			Prix par jour : "+this.getPrixParJour()+"\n";
+		res += "			Prix par jour : "+this.getPrixParJour()+"€\n";
 		res += "			Nombre disponible : "+this.getDisponnibilité()+"\n";
 		return res;
 	}

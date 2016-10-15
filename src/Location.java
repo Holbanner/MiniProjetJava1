@@ -16,8 +16,6 @@ public class Location implements Serializable {
 	// dates de d�but et de fin de location au format date
 	private Calendar  dateDebut;
 	private Calendar  dateFin;
-	// montant total factur� au client
-	private float montant;
 	// liste d'articles
 	private ArrayList<Article> articles;
 
@@ -40,14 +38,6 @@ public class Location implements Serializable {
 		this.dateFin = dateFin;
 	}
 
-	public float getMontant() {
-		return montant;
-	}
-
-	public void setMontant(float montant) {
-		this.montant = montant;
-	}
-
 	public ArrayList<Article> getArticles() {
 		return articles;
 	}
@@ -66,21 +56,18 @@ public class Location implements Serializable {
 	 */
 	// premier permettant d'ajouter des articles un par un au besoin
 
-	public Location(Calendar dateDebut, Calendar dateFin, float montant,
-			ArrayList<Article> articles) {
+	public Location(Calendar dateDebut, Calendar dateFin, ArrayList<Article> articles) {
 		super();
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
-		this.montant = montant;
 		this.articles = articles; 
 
 	}
 
-	public Location(Calendar dateDebut, Calendar dateFin, float montant) {
+	public Location(Calendar dateDebut, Calendar dateFin) {
 		super();
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
-		this.montant = montant;
 		this.articles = new ArrayList<Article>();
 
 	}

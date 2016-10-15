@@ -5,32 +5,33 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Sauvegarde {
 
 	private ArrayList<Location> Locations;
-	private int mois;
+	private Calendar cal;
 
-	public Sauvegarde(int mois){
-		this.setMois(mois);		
+	public Sauvegarde(Calendar cal){
+		this.setCal(cal);		
 	}
 	
-	public static Sauvegarde getSauvegarde(int mois){
+	public static Sauvegarde getSauvegarde(Calendar cal){
 		Sauvegarde sauvegarde;
 		try {//si on arrive à trouver le fichier on le charge
-			FileInputStream fileIn = new FileInputStream( "fichier");
+			FileInputStream fileIn = new FileInputStream( cal.get(Calendar.YEAR)+""+cal.get(Calendar.MONTH));
 
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			sauvegarde = (Sauvegarde) in.readObject();
 			in.close();
 			fileIn.close();
 		} catch (FileNotFoundException e) {//sinon on créé une nouvelle sauvegarde
-			sauvegarde = new Sauvegarde(mois);
+			sauvegarde = new Sauvegarde(cal);
 		} catch (ClassNotFoundException e) {
-			sauvegarde = new Sauvegarde(0);
+			sauvegarde = new Sauvegarde(cal);
 			e.printStackTrace();
 		} catch (IOException e) {
-			sauvegarde = new Sauvegarde(0);
+			sauvegarde = new Sauvegarde(cal);
 			e.printStackTrace();
 		}
 		
@@ -44,11 +45,11 @@ public class Sauvegarde {
 	public void setLocations(ArrayList<Location> locations) {
 		Locations = locations;
 	}
-	public int getMois() {
-		return mois;
+	public Calendar getCal() {
+		return cal;
 	}
-	public void setMois(int mois) {
-		this.mois = mois;
+	public void setCal(Calendar cal) {
+		this.cal = cal;
 	}
 	
 	public void addLocation(Location location, Client client){

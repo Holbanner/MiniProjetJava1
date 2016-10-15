@@ -29,6 +29,6 @@ public class TypeObjectif {
 	
 	//méthodes
 	public String toString(){
-		return "	maximum => "+ this.getMax() + "minimum => "+ this.getMax(); 
+		return "	maximum => "+ this.getMax() + " minimum => "+ this.getMax(); 
 	}
 }

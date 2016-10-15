@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class Magasin {
@@ -102,6 +104,10 @@ public class Magasin {
 		articles.remove(article);
 	}
 	
+	public Article getArticle(int index){
+		return this.articles.get(index);
+	}
+	
 	/**
 	 * methode permetant de quitter le menu
 	 */
@@ -130,29 +136,29 @@ public class Magasin {
 		System.out.println("|                             v 1.0 |");
 		System.out.println("-------------------------------------");
 
-		int selection = input.nextInt();
+		String selection = input.next();
 		input.nextLine();
 		// Chaque case correspond à une selection
 		switch (selection) {
-		case 1:
+		case "1":
 			//ici faire la magie choix 1 ex: client.sauvegarde();
 			menuP1();
 			break;
-		case 2:
+		case "2":
 			//choix deux la vie de moi
-			System.out.println("2 : ");
+			menuP2();
 			
 			break;
-		case 3:
+		case "3":
 			System.out.println("choix 3");
 			break;
-		case 4:
+		case "4":
 			System.out.println("choix 4");
 			break;
-		case 5:
+		case "5":
 			System.out.println("choix 5");
 			break;
-		case 6:
+		case "6":
 			//pour faire appel à la méthode exit qui ferme le programme
 			this.exit();
 			break;
@@ -217,6 +223,110 @@ public class Magasin {
 		}
 	}
 	
+	public void menuP2() {
+		System.out.println("\n\n-------------------------------------");
+		System.out.println("|        Liste des Articles         |");
+		System.out.println("|-----------------------------------|");
+		System.out.println("|                                   |");
+		System.out.println("| 1.) Selectionner un client        |");
+		System.out.println("| 2.) Créer un client               |");
+		System.out.println("| 3.) Retour                        |");
+		System.out.println("|                             v 1.0 |");
+		System.out.println("-------------------------------------");
+
+		String selection = input.next();
+		input.nextLine();
+		// Chaque case correspond à une selection
+		switch (selection) {
+		case "1":
+			//ici faire la magie choix 1 ex: client.sauvegarde();
+			AfficherClients();
+			System.out.println("Appuyer sur une entrer pour continuer...");
+			input.nextLine();
+			menuP22();
+			break;
+		case "2":
+			//choix deux la vie de moi
+			AfficherArticlesMarque();
+			System.out.println("Appuyer sur une entrer pour continuer...");
+			input.nextLine();
+			menuP2();
+			break;
+		case "3":
+			AfficherArticlesIntitule();
+			System.out.println("Appuyer sur une entrer pour continuer...");
+			input.nextLine();
+			menuP2();
+			break;
+		default:
+			// quand on choisie pas un bon chiffre
+			System.out.println("Selection invalide.");
+			menuP2();
+			break;
+		}
+	}
+	
+	private void menuP22() {
+		String selection = input.next();
+		
+		try{
+			Calendar dateDebut;
+			Client client = this.getClient(Integer.parseInt(selection));
+			
+			System.out.println("Saissisez la date de début au format jj/MM/aaaa");
+			input.nextLine();
+			selection = input.next();
+			String tab[] = selection.split(",");
+			int j,M,a;
+			try{
+				j = Integer.parseInt(tab[0]);
+				M = Integer.parseInt(tab[1]);
+				a = Integer.parseInt(tab[2]);
+				dateDebut = new GregorianCalendar(a,M-1,j);
+			}catch(NumberFormatException e){
+				System.out.println("Selection invalide.");
+				this.menuP2();
+			}
+			
+			Calendar dateFin;
+			System.out.println("Saissisez la date de fin au format jj/MM/aaaa");
+			input.nextLine();
+			selection = input.next();
+			tab = selection.split(",");
+			try{
+				j = Integer.parseInt(tab[0]);
+				M = Integer.parseInt(tab[1]);
+				a = Integer.parseInt(tab[2]);
+				dateFin = new GregorianCalendar(a,M-1,j);
+			}catch(NumberFormatException e){
+				System.out.println("Selection invalide.");
+				this.menuP2();
+			}catch (Exception e) {
+				System.out.println("Selection invalide.");
+				this.menuP2();
+			}
+			
+			this.AfficherChoixArticles();
+			System.out.println("Séléctionner les articles de la location en utilisant leur numéro et en les séparent d'une virgule ex:1,12,3");
+			input.nextLine();
+			selection = input.next();
+			ArrayList<Article> listeArticle = new ArrayList<Article>();
+			for(String numArticle : selection.split(",")){
+				try{
+					listeArticle.add(this.getArticle(Integer.parseInt(selection)));
+				}catch(NumberFormatException e){
+					System.out.println("Selection invalide.");
+					this.menuP2();
+				}
+			}
+			client.ajouterLocation(new Location(dateDebut, dateFin, listeArticle));
+		}catch(NumberFormatException e){
+			System.out.println("Selection invalide.");
+			menuP2();
+		}
+		
+	}
+
 	public static void main(String[] args) {
 		ArrayList<Article> articles = new ArrayList<Article>();
 		articles.add(new DispositifAcquisition("A123", "Adiddas", "EnormeAppareil", 20, 20, 2000000, new Resolution(1000, 2000), new TypeObjectif(100,500)));
@@ -260,6 +370,15 @@ public class Magasin {
 	public void AfficherTousLesArticles(){
 		for(Article article : this.getArticles()){
 			System.out.println(article.toString());
+		}
+	}
+	
+	public void AfficherChoixArticles(){
+		Collections.sort(this.articles, new ArticleIntituleComparator());
+		int i=0;
+		for(Article article : this.getArticles()){
+			System.out.println("N°"+i+"\n"+article.toString());
+			i++;
 		}
 	}
 }
