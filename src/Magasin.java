@@ -1,8 +1,17 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Magasin {
 	/*
@@ -113,6 +122,7 @@ public class Magasin {
 	 */
 	private void exit() {
 		System.out.println("Exiting...");
+		this.save("jeuDeTest");
 		System.exit(1);
 	}
 	
@@ -131,7 +141,7 @@ public class Magasin {
 		System.out.println("| 2.) Enregistrer une location      |");
 		System.out.println("| 3.) Lister locations en cours     |");
 		System.out.println("| 4.) Terminer une location         |");
-		System.out.println("| 5.) Calculer la recette mensuel   |");
+		System.out.println("| 5.) Recette d'une période         |");
 		System.out.println("| 6.) Quitter!                      |");
 		System.out.println("|                             v 1.0 |");
 		System.out.println("-------------------------------------");
@@ -153,10 +163,10 @@ public class Magasin {
 			menuP3();
 			break;
 		case "4":
-			System.out.println("choix 4");
+			menuP4();
 			break;
 		case "5":
-			System.out.println("choix 5");
+			menuP5();
 			break;
 		case "6":
 			//pour faire appel à la méthode exit qui ferme le programme
@@ -361,6 +371,84 @@ public class Magasin {
 		}
 	}
 	
+	public void menuP4() {
+		AfficherClients();
+		System.out.println("\n\n" + "Saissisez le n° du client dont vous voulez archiver la locations.");
+
+		String selection = input.next();
+		input.nextLine();
+		
+		try{
+			Client client = this.getClient(Integer.parseInt(selection));
+			client.AfficherLocationsEnCours();
+			System.out.println("\n\n" + "Saissisez le n° de la location que vous voulez archiver.");
+			selection = input.next();
+			input.nextLine();
+			Location loc = client.getLocation(Integer.parseInt(selection));
+			client.saveLocation(loc);
+
+			System.out.println("\n\n" + "Location archivé.");
+			menuP();
+
+		}catch(Exception e){
+			System.out.println("Selection invalide.");
+		}
+	}
+	
+	public void menuP5() {
+		System.out.println("\n\n" + "Saissisez une date de début au format jj/MM/yyyy.");
+		String selection = input.next();
+		String cal1txt = selection;
+		input.nextLine();
+		String tab[];
+		Calendar dateDebut = new GregorianCalendar();
+		Calendar dateFin = new GregorianCalendar();
+		try{
+			tab = selection.split("/");
+			dateDebut = new GregorianCalendar(Integer.parseInt(tab[2]), Integer.parseInt(tab[1])-1, Integer.parseInt(tab[0]));
+		}catch(Exception e){
+			System.out.println("Saisie invalide.");
+		}
+		
+		System.out.println("\n\n" + "Saissisez une date de fin au format jj/MM/yyyy.");
+		selection = input.next();
+		String cal2txt = selection;
+		input.nextLine();
+		try{
+			tab = selection.split("/");
+			dateFin = new GregorianCalendar(Integer.parseInt(tab[2]), Integer.parseInt(tab[1])-1, Integer.parseInt(tab[0]));
+		}catch(Exception e){
+			System.out.println("Saisie invalide.");
+			menuP();
+		}
+		
+		float res = 0;
+		
+		for(Client client : this.clients){
+			res += client.getMontantTotalEntre(dateDebut, dateFin);
+		}
+		
+		File f = new File(".");
+		Pattern pattern = Pattern.compile("[0-9]{6-6}");
+	    Matcher matcher;
+		for(String s : f.list()){
+			matcher = pattern.matcher(s);
+			if(matcher.find()){
+				for(Location loc : Sauvegarde.getSauvegarde(s).getLocations()){
+					if(loc.estEntre(dateDebut, dateFin)){
+						res += loc.calculerMontant();
+					}
+				}
+			}
+		}
+		
+		
+		
+		System.out.println("\n\n" + "Chiffre d'affaire entre " + cal1txt + " et " + cal2txt);
+
+		menuP();
+	}
+	
 	public static void main(String[] args) {
 		ArrayList<Client> client = new ArrayList<Client>();
 		client.add(new Client("Platini", "Michou","20 rue jean", "12132132"));
@@ -371,15 +459,18 @@ public class Magasin {
 		articles.add(new Fond("A1253", "Adiddas", "LeFondvert", 1, 10, 100, 200));
 
 		Magasin magasin = new Magasin("carouf");
+		
 		magasin.setArticles(articles);
 		magasin.setClients(client);
+		
+		magasin.load("jeuDeTest");
 		while (true){
 			magasin.menuP();
 		}
 	}
 	
 	public void AfficherClients(){
-		int i =0;
+		int i = 0;
 		for(Client client : this.getClients()){
 			System.out.println(i + " - " + client.toString());
 			i++;
@@ -418,6 +509,33 @@ public class Magasin {
 		for(Article article : this.getArticles()){
 			System.out.println("N°"+i+"\n"+article.toString());
 			i++;
+		}
+	}
+	
+	public void load(String file){
+		
+		try {//si on arrive à trouver le fichier on le charge
+			FileInputStream fileIn = new FileInputStream(file);
+
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			Magasin mag = (Magasin)in.readObject();
+			this.setArticles(mag.getArticles());
+			this.setClients(mag.getClients());
+			in.close();
+			fileIn.close();
+		} catch (FileNotFoundException e) {} catch (ClassNotFoundException e) {} catch (IOException e) {}
+		
+	}
+	
+	public void save(String file){
+		try {
+			FileOutputStream fileOut = new FileOutputStream(file);
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(this);
+			out.close();
+			fileOut.close();			
+		} catch (IOException i) {
+			i.printStackTrace();
 		}
 	}
 }

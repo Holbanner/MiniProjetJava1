@@ -147,6 +147,17 @@ public class Location implements Serializable {
 		Collections.sort(this.articles, comparator);
 	}
 
+	public boolean estEntre(Calendar date1, Calendar date2){
+		//on considère que le paiment s'éffectue lors de la date de début de la location
+		//si le timestamp est entre les deux autres on renvoie true
+		if(this.getDateDebut().getTimeInMillis() > date1.getTimeInMillis() && this.getDateDebut().getTimeInMillis() < date2.getTimeInMillis()){
+			return true;
+		}
+		return false;
+		
+		
+	}
+	
 	public String toString() {
 		String res = "Location : " + "\n";
 		res += "	Date dï¿½but : " + this.dateDebut.toString() + "\n";
@@ -156,6 +167,5 @@ public class Location implements Serializable {
 			res += article.toString() + "\n" + "\n";
 		}
 		return res;
-
 	}
 }

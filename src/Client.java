@@ -69,6 +69,10 @@ public class Client {
 	public void setLocations(ArrayList<Location> locations) {
 		this.locations = locations;
 	}
+	
+	public Location getLocation(int index){
+		return this.getLocations().get(index);
+	}
 
 	/**
 	 * constructeur, avec deux possibilités. Le second est une surcharge du
@@ -111,8 +115,9 @@ public class Client {
 	 * @param sauvegarde
 	 * @throws IOException
 	 */
-	 public void saveCommande(String sauvegarde, Location lSave){
-		Sauvegarde.getSauvegarde(lSave.getDateFin().get(Calendar.MONTH)).addLocation(lSave, this);
+	 public void saveLocation(Location lSave){
+		Sauvegarde.getSauvegarde(lSave.getDateFin()).addLocation(lSave, this);
+		this.supprimerLocation(lSave);
 	}
 
 	/**
@@ -155,5 +160,15 @@ public class Client {
 	
 	public String toString(){
 		return this.nom +" "+ this.prénom +"\n";
+	}
+	
+	public float getMontantTotalEntre(Calendar date1, Calendar date2){
+		float res = 0;
+		for( Location loc : locations ){
+			if(loc.estEntre(date1, date2)){
+				res += loc.calculerMontant();
+			}
+		}
+		return res;
 	}
 }

@@ -5,8 +5,8 @@ public class LocationSauvegarde extends Location{
 
 	private Client client;
 
-	public LocationSauvegarde(Calendar dateDebut, Calendar dateFin, float montant) {
-		super(dateDebut, dateFin, montant);
+	public LocationSauvegarde(Calendar dateDebut, Calendar dateFin) {
+		super(dateDebut, dateFin);
 		// TODO Auto-generated constructor stub
 	}
 
