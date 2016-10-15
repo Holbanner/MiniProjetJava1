@@ -129,7 +129,7 @@ public class Magasin {
 		System.out.println("|                                   |");
 		System.out.println("| 1.) Lister les articles           |");
 		System.out.println("| 2.) Enregistrer une location      |");
-		System.out.println("| 3.) Afficher les locations client |");
+		System.out.println("| 3.) Lister locations en cours     |");
 		System.out.println("| 4.) Terminer une location         |");
 		System.out.println("| 5.) Calculer la recette mensuel   |");
 		System.out.println("| 6.) Quitter!                      |");
@@ -150,7 +150,7 @@ public class Magasin {
 			
 			break;
 		case "3":
-			System.out.println("choix 3");
+			menuP3();
 			break;
 		case "4":
 			System.out.println("choix 4");
@@ -225,7 +225,7 @@ public class Magasin {
 	
 	public void menuP2() {
 		System.out.println("\n\n-------------------------------------");
-		System.out.println("|        Liste des Articles         |");
+		System.out.println("|      Enregistrer une location     |");
 		System.out.println("|-----------------------------------|");
 		System.out.println("|                                   |");
 		System.out.println("| 1.) Selectionner un client        |");
@@ -241,15 +241,14 @@ public class Magasin {
 		case "1":
 			//ici faire la magie choix 1 ex: client.sauvegarde();
 			AfficherClients();
-			System.out.println("Appuyer sur une entrer pour continuer...");
-			input.nextLine();
+			System.out.println("Saissisez le client par son n° :");
+			
 			menuP22();
 			break;
 		case "2":
 			//choix deux la vie de moi
-			AfficherArticlesMarque();
-			System.out.println("Appuyer sur une entrer pour continuer...");
-			input.nextLine();
+			System.out.println("Saissisez nom,prénom,coordonné,numéro de tel du client dans cet ordre séparé de virgule :");
+			ajouterClientPrompt();
 			menuP2();
 			break;
 		case "3":
@@ -266,17 +265,31 @@ public class Magasin {
 		}
 	}
 	
+	private void ajouterClientPrompt() {
+
+		String selection = input.next();
+		String tab[] = selection.split(",");
+		try{
+			this.ajouterClient(new Client(tab[0],tab[1],tab[2],tab[3]));
+			System.out.println("Client créer.");
+		}catch(Exception e){
+			System.out.println("Selection invalide.");
+			
+		}
+		this.menuP2();
+	}
+
 	private void menuP22() {
 		String selection = input.next();
 		
 		try{
-			Calendar dateDebut;
+			Calendar dateDebut = new GregorianCalendar();
 			Client client = this.getClient(Integer.parseInt(selection));
 			
 			System.out.println("Saissisez la date de début au format jj/MM/aaaa");
 			input.nextLine();
 			selection = input.next();
-			String tab[] = selection.split(",");
+			String tab[] = selection.split("/");
 			int j,M,a;
 			try{
 				j = Integer.parseInt(tab[0]);
@@ -286,13 +299,16 @@ public class Magasin {
 			}catch(NumberFormatException e){
 				System.out.println("Selection invalide.");
 				this.menuP2();
+			}catch (Exception e) {
+				System.out.println("Selection invalide.");
+				this.menuP2();
 			}
 			
-			Calendar dateFin;
+			Calendar dateFin = new GregorianCalendar();
 			System.out.println("Saissisez la date de fin au format jj/MM/aaaa");
 			input.nextLine();
 			selection = input.next();
-			tab = selection.split(",");
+			tab = selection.split("/");
 			try{
 				j = Integer.parseInt(tab[0]);
 				M = Integer.parseInt(tab[1]);
@@ -311,29 +327,52 @@ public class Magasin {
 			input.nextLine();
 			selection = input.next();
 			ArrayList<Article> listeArticle = new ArrayList<Article>();
-			for(String numArticle : selection.split(",")){
+			tab = selection.split(",");
+			for(String numArticle : tab){
 				try{
-					listeArticle.add(this.getArticle(Integer.parseInt(selection)));
+					listeArticle.add(this.getArticle(Integer.parseInt(numArticle)));
 				}catch(NumberFormatException e){
 					System.out.println("Selection invalide.");
 					this.menuP2();
 				}
 			}
-			client.ajouterLocation(new Location(dateDebut, dateFin, listeArticle));
+			Location loc = new Location(dateDebut, dateFin, listeArticle);
+			client.ajouterLocation(loc);
+			System.out.println("Location ajouté.");
+			System.out.println("Montant de la location : " + loc.calculerMontant());
+			
 		}catch(NumberFormatException e){
 			System.out.println("Selection invalide.");
-			menuP2();
 		}
-		
+		menuP2();
 	}
 
+	public void menuP3() {
+		AfficherClients();
+		System.out.println("\n\n" + "Saissisez le n° du client dont vous voulez voir les locations.");
+
+		String selection = input.next();
+		input.nextLine();
+		
+		try{
+			this.getClient(Integer.parseInt(selection)).AfficherLocationsEnCours();
+		}catch(Exception e){
+			System.out.println("Selection invalide.");
+		}
+	}
+	
 	public static void main(String[] args) {
+		ArrayList<Client> client = new ArrayList<Client>();
+		client.add(new Client("Platini", "Michou","20 rue jean", "12132132"));
+		client.add(new Client("Nabila", "JeSaisPlus","20 rue jeanne", "12132132"));
+				
 		ArrayList<Article> articles = new ArrayList<Article>();
 		articles.add(new DispositifAcquisition("A123", "Adiddas", "EnormeAppareil", 20, 20, 2000000, new Resolution(1000, 2000), new TypeObjectif(100,500)));
 		articles.add(new Fond("A1253", "Adiddas", "LeFondvert", 1, 10, 100, 200));
 
 		Magasin magasin = new Magasin("carouf");
 		magasin.setArticles(articles);
+		magasin.setClients(client);
 		while (true){
 			magasin.menuP();
 		}

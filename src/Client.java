@@ -23,7 +23,7 @@ public class Client {
 	private String nom;
 	private String prénom;
 	private String coordonné;
-	private int numero;
+	private String numero;
 	// liste de locations
 	private ArrayList<Location> locations;
 
@@ -54,11 +54,11 @@ public class Client {
 		this.coordonné = coordonné;
 	}
 
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 
@@ -86,7 +86,7 @@ public class Client {
 	 */
 	// premier permettant d'ajouter des Locations une par une au besoin
 
-	public Client(String nom, String prénom, String coordonné, int numero, ArrayList<Location> locations) {
+	public Client(String nom, String prénom, String coordonné, String numero, ArrayList<Location> locations) {
 		super();
 		this.nom = nom;
 		this.prénom = prénom;
@@ -95,7 +95,7 @@ public class Client {
 		this.locations = locations;
 	}
 
-	public Client(String nom, String prénom, String coordonné, int numero) {
+	public Client(String nom, String prénom, String coordonné, String numero) {
 		super();
 		this.nom = nom;
 		this.prénom = prénom;
