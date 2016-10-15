@@ -20,13 +20,6 @@ public class ClientTest{
 	testSubject=createTestSubject();testSubject.saveCommande(sauvegarde, lSave);
 	}*/
 
-	@Test
-	public void testLoadCommande() throws Exception {
-	Client testSubject;String sauvegarde = "";
-	Location result;
-	
-	// default test
-	testSubject=createTestSubject();result=testSubject.loadCommande(sauvegarde);
-	}
+
 
 }

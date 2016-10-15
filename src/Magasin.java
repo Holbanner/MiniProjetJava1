@@ -135,7 +135,8 @@ public class Magasin {
 			break;
 		case 2:
 			//choix deux la vie de moi
-			System.out.println("choix 2");
+			System.out.println("2 : ");
+			
 			break;
 		case 3:
 			System.out.println("choix 3");
@@ -161,6 +162,14 @@ public class Magasin {
 		 Magasin magasin = new Magasin("carouf");
 		  while (true)
 		    magasin.menuP();
+	}
+	
+	public void AfficherClients(){
+		int i =0;
+		for(Client client : this.getClients()){
+			System.out.println(i + " - " + client.toString());
+			i++;
+		}
 	}
 
 }

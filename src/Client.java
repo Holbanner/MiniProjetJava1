@@ -112,39 +112,7 @@ public class Client {
 	 * @throws IOException
 	 */
 	 public void saveCommande(String sauvegarde, Location lSave){
-
-		SimpleDateFormat sdf = new SimpleDateFormat("MM");
-		Sauvegarde.getSauvegarde(lSave.getDateFin().get(Calendar.MONTH));
-		
-	}
-
-
-	/**
-	 * Methode qui permet de récuperer les commandes archivées
-	 * 
-	 * @param sauvegarde
-	 *            :nom du fichier
-	 * @throws IOException
-	 */
-	public Location loadCommande(String sauvegarde) throws IOException {
-		Location loci = null;
-		// for (Location loc : this.locations) {
-		try {
-			FileInputStream fileIn = new FileInputStream(sauvegarde);
-			System.out.printf("Hallo");
-			ObjectInputStream in = new ObjectInputStream(fileIn);
-			loci = (Location) in.readObject();
-			in.close();
-			fileIn.close();
-			return loci;
-		} catch (IOException i) {
-			i.printStackTrace();
-		} catch (ClassNotFoundException c) {
-			System.out.println("Location class not found");
-			c.printStackTrace();
-			// }
-		}
-		return loci;
+		Sauvegarde.getSauvegarde(lSave.getDateFin().get(Calendar.MONTH)).addLocation(lSave, this);
 	}
 
 	/**
@@ -183,5 +151,9 @@ public class Client {
 		}
 		return res;
 
+	}
+	
+	public String toString(){
+		return this.nom +" "+ this.prénom +"\n";
 	}
 }
