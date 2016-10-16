@@ -62,7 +62,7 @@ public class Sauvegarde implements Serializable{
 	public static Sauvegarde getSauvegarde(String file){
 		Sauvegarde sauvegarde;
 		try {//si on arrive à trouver le fichier on le charge
-			FileInputStream fileIn = new FileInputStream(file+".loc");
+			FileInputStream fileIn = new FileInputStream(file);
 
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			

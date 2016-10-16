@@ -121,7 +121,7 @@ public class Location implements Serializable {
 	public boolean estEntre(Calendar date1, Calendar date2){
 		//on considère que le paiment s'éffectue lors de la date de début de la location
 		//si le timestamp est entre les deux autres on renvoie true
-		if(this.getDateDebut().getTimeInMillis() > date1.getTimeInMillis() && this.getDateDebut().getTimeInMillis() < date2.getTimeInMillis()){
+		if(this.getDateDebut().getTimeInMillis() >= date1.getTimeInMillis() && this.getDateDebut().getTimeInMillis() <= date2.getTimeInMillis()){
 			return true;
 		}
 		return false;

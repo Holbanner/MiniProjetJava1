@@ -511,13 +511,13 @@ public class Magasin implements Serializable{
 		
 		File f = new File(".");
 		//on veut tous les fichier de sauvegarde
-		Pattern pattern = Pattern.compile("[0-9]{6}");
+		Pattern pattern = Pattern.compile("[0-9]{5,6}");
 	    Matcher matcher;
 		for(String s : f.list()){
 			//pour chaque fichier de sauvegarde 
 			matcher = pattern.matcher(s);
 			if(matcher.find()){
-				for(Location loc : Sauvegarde.getSauvegarde(s).getLocations()){
+				for(LocationSauvegarde loc : Sauvegarde.getSauvegarde(s).getLocations()){
 					//on récupère ou pas le montant de chaque location contenue dans le fichier
 					if(loc.estEntre(dateDebut, dateFin)){
 						res += loc.calculerMontant();
@@ -535,22 +535,28 @@ public class Magasin implements Serializable{
 	
 	public static void main(String[] args) {
 		
-		ArrayList<Article> articles = new ArrayList<Article>();
+		/*ArrayList<Article> articles = new ArrayList<Article>();
 		articles.add(new DispositifAcquisition("A123", "Adiddas", "EnormeAppareil", 20, 20, 2000000, new Resolution(1000, 2000), new TypeObjectif(100,500)));
 		articles.add(new Fond("A1253", "Adiddas", "LeFondvert", 1, 10, 100, 200));
 		articles.add(new DispositifAcquisition("OSS117", "Levis", "Jean-dj", 20, 20, 2000000, new Resolution(1000, 2000), new TypeObjectif(100,500)));
 		articles.add(new Fond("A1153", "Airness", "LeFondBleu", 1, 10, 100, 200));
 		articles.add(new Panneau("SA1212", "Mairie de Rennes", "STOP", 20, 50, 50));
 		articles.add(new Panneau("SA1212", "Mairie de Rennes", "Kenavo", 20, 50, 50));
-		articles.add(new Reflecteur("S2154115", "Arlequin", "boom-blanc", 1000, 2, 200, 200));
+
 
 		Client platini = new Client("Platini", "Michou","20 rue jean", "12132132");
 		
+		
+		
 		Location location = new Location(new GregorianCalendar(2016,9,10), new GregorianCalendar(2016,9,25), articles);
 		platini.ajouterLocation(location);
-		location = new Location(new GregorianCalendar(2016,9,1), new GregorianCalendar(2016,9,20), articles);
-		platini.ajouterLocation(location);
-
+		
+		ArrayList<Article> articles2 = new ArrayList<Article>();
+		articles2.addAll(articles);
+		articles2.add(new Reflecteur("S2154115", "Arlequin", "boom-blanc", 1000, 2, 200, 200));
+		Location location2 = new Location(new GregorianCalendar(2016,9,1), new GregorianCalendar(2016,9,30), articles2);
+		platini.ajouterLocation(location2);
+		
 		ArrayList<Client> client = new ArrayList<Client>();
 		client.add(platini);
 		client.add(new Client("Yves", "Zenelse","20 rue anne", "12132132"));
@@ -558,12 +564,13 @@ public class Magasin implements Serializable{
 		client.add(new Client("Kan", "Jerry","20 rue je", "12132132"));
 		client.add(new Client("Bon", "Jean","20 rue an", "12132132"));
 		client.add(new Client("Raid", "Aldo","20 rue janne", "12132132"));
+		*/
 		
 		Magasin magasin = new Magasin("carouf");
 		
-		magasin.setArticles(articles);
+		/*magasin.setArticles(articles2);
 		magasin.setClients(client);
-		
+		*/
 		magasin.load("jeuDeTest");
 		while (true){
 			magasin.menuP();
@@ -641,9 +648,9 @@ public class Magasin implements Serializable{
 			FileInputStream fileIn = new FileInputStream(file);
 
 			ObjectInputStream in = new ObjectInputStream(fileIn);
-			Magasin mag = (Magasin)in.readObject();
-			this.setArticles(mag.getArticles());
-			this.setClients(mag.getClients());
+			MagasinSauvegarde magSave = (MagasinSauvegarde)in.readObject();
+			this.setArticles(magSave.getArticles());
+			this.setClients(magSave.getClients());
 			in.close();
 			fileIn.close();
 		} catch (FileNotFoundException e) {} catch (ClassNotFoundException e) {} catch (IOException e) {}
@@ -659,7 +666,8 @@ public class Magasin implements Serializable{
 			FileOutputStream fileOut = new FileOutputStream(file);
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			//on écrit dans le fichier le magasin 
-			out.writeObject(this);
+			MagasinSauvegarde saveMag = new MagasinSauvegarde(this.getNom(), this.getClients(), this.getArticles());
+			out.writeObject(saveMag);
 			out.close();
 			fileOut.close();			
 		} catch (IOException i) {
