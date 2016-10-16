@@ -437,6 +437,10 @@ public class Magasin implements Serializable{
 			System.out.println("N° " + i + loc.toString());
 			i++;
 		}
+		if(i==0){
+			System.out.println("\n\n" + "Désolé, ce client n'a pas de location.");
+			menuP();
+		}
 		System.out.println("\n\n" + "Saissisez le n° de la location que vous voulez archiver.");
 		selection = input.next();
 		input.nextLine();
