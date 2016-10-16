@@ -175,10 +175,13 @@ public class Magasin {
 		default:
 			// quand on choisie pas un bon chiffre
 			System.out.println("Selection invalide.");
+			menuP();
 			break;
 		}
 	}
-	
+	/**
+	 * créer et afficher le menu pour lister les articles
+	 */
 	public void menuP1() {
 		System.out.println("\n\n-------------------------------------");
 		System.out.println("|        Liste des Articles         |");
@@ -197,14 +200,12 @@ public class Magasin {
 		// Chaque case correspond à une selection
 		switch (selection) {
 		case "1":
-			//ici faire la magie choix 1 ex: client.sauvegarde();
 			AfficherArticlesReference();
 			System.out.println("Appuyer sur une entrer pour continuer...");
 			input.nextLine();
 			menuP1();
 			break;
 		case "2":
-			//choix deux la vie de moi
 			AfficherArticlesMarque();
 			System.out.println("Appuyer sur une entrer pour continuer...");
 			input.nextLine();
@@ -223,6 +224,7 @@ public class Magasin {
 			menuP1();
 			break;
 		case "5":
+			//retour au menu principal
 			menuP();
 			break;
 		default:
@@ -232,7 +234,9 @@ public class Magasin {
 			break;
 		}
 	}
-	
+	/**
+	 * créer et afficher le menu d'enregistrement d'une location
+	 */
 	public void menuP2() {
 		System.out.println("\n\n-------------------------------------");
 		System.out.println("|      Enregistrer une location     |");
@@ -246,26 +250,21 @@ public class Magasin {
 
 		String selection = input.next();
 		input.nextLine();
-		// Chaque case correspond à une selection
+
+		//une location appartient à un client on doit donc créer un client ou bien le choisir dans une liste
 		switch (selection) {
 		case "1":
-			//ici faire la magie choix 1 ex: client.sauvegarde();
-			AfficherClients();
-			System.out.println("Saissisez le client par son n° :");
 			
+			//on va au sous menu pour enregistrer la location
 			menuP22();
 			break;
 		case "2":
-			//choix deux la vie de moi
-			System.out.println("Saissisez nom,prénom,coordonné,numéro de tel du client dans cet ordre séparé de virgule :");
+			//on créer le client
 			ajouterClientPrompt();
-			menuP2();
 			break;
 		case "3":
-			AfficherArticlesIntitule();
-			System.out.println("Appuyer sur une entrer pour continuer...");
-			input.nextLine();
-			menuP2();
+			//le retour au menu principal
+			menuP();
 			break;
 		default:
 			// quand on choisie pas un bon chiffre
@@ -274,9 +273,12 @@ public class Magasin {
 			break;
 		}
 	}
-	
+	/**
+	 * Permet d'afficher les consignes pour créer un client, puis le créer
+	 */
 	private void ajouterClientPrompt() {
-
+		
+		System.out.println("Saissisez nom,prénom,coordonné,numéro de tel du client dans cet ordre séparé de virgule :");
 		String selection = input.next();
 		String tab[] = selection.split(",");
 		try{
@@ -286,78 +288,106 @@ public class Magasin {
 			System.out.println("Selection invalide.");
 			
 		}
+		//on retourne au menu d'enregistrement d'une location
 		this.menuP2();
 	}
 
+	/**
+	 * Permet d'afficher les consignes et d'enregistrer une location.
+	 */
 	private void menuP22() {
+		//on affiche les client pour pouvoir les selectionner
+		AfficherClients();
+		System.out.println("Saissisez le client par son n° :");
 		String selection = input.next();
 		
 		try{
 			Calendar dateDebut = new GregorianCalendar();
+			//on essaye de récupérer le client
 			Client client = this.getClient(Integer.parseInt(selection));
 			
+			//on demande la date de début
 			System.out.println("Saissisez la date de début au format jj/MM/aaaa");
 			input.nextLine();
 			selection = input.next();
 			String tab[] = selection.split("/");
 			int j,M,a;
 			try{
+				//on essaye de créer la date demandé
 				j = Integer.parseInt(tab[0]);
 				M = Integer.parseInt(tab[1]);
 				a = Integer.parseInt(tab[2]);
 				dateDebut = new GregorianCalendar(a,M-1,j);
 			}catch(NumberFormatException e){
-				System.out.println("Selection invalide.");
+				//si la saisie est mauvaise
+				System.out.println("Saisie invalide.");
 				this.menuP2();
 			}catch (Exception e) {
-				System.out.println("Selection invalide.");
+				//si la saisie est mauvaise
+				System.out.println("Saisie invalide.");
 				this.menuP2();
 			}
 			
+			//on récupère la date de fin
 			Calendar dateFin = new GregorianCalendar();
 			System.out.println("Saissisez la date de fin au format jj/MM/aaaa");
 			input.nextLine();
 			selection = input.next();
 			tab = selection.split("/");
 			try{
+				//on essaye de la créer
 				j = Integer.parseInt(tab[0]);
 				M = Integer.parseInt(tab[1]);
 				a = Integer.parseInt(tab[2]);
 				dateFin = new GregorianCalendar(a,M-1,j);
 			}catch(NumberFormatException e){
-				System.out.println("Selection invalide.");
+				//si la saisie est mauvaise retour à la case départ
+				System.out.println("Saisie invalide.");
 				this.menuP2();
 			}catch (Exception e) {
-				System.out.println("Selection invalide.");
+				//si la saisie est mauvaise
+				System.out.println("Saisie invalide.");
 				this.menuP2();
 			}
 			
+			//on affiche les articles avec un n° pour pouvoir les choisir 
 			this.AfficherChoixArticles();
 			System.out.println("Séléctionner les articles de la location en utilisant leur numéro et en les séparent d'une virgule ex:1,12,3");
 			input.nextLine();
 			selection = input.next();
 			ArrayList<Article> listeArticle = new ArrayList<Article>();
 			tab = selection.split(",");
+			//on récupère les articles un a un si il n'y a pas d'erreur
 			for(String numArticle : tab){
 				try{
 					listeArticle.add(this.getArticle(Integer.parseInt(numArticle)));
-				}catch(NumberFormatException e){
-					System.out.println("Selection invalide.");
+				}catch(Exception e){
+					//Mauvaise saisie on retourne au menu précédent
+					System.out.println("Saisie invalide.");
 					this.menuP2();
 				}
 			}
+			
+			//on créer la location
 			Location loc = new Location(dateDebut, dateFin, listeArticle);
+			//on l'ajoute au client
 			client.ajouterLocation(loc);
 			System.out.println("Location ajouté.");
+			//on retourne le montant
 			System.out.println("Montant de la location : " + loc.calculerMontant());
 			
-		}catch(NumberFormatException e){
+		}catch(Exception e){
 			System.out.println("Selection invalide.");
 		}
+		//on retourne au précédent menu
 		menuP2();
 	}
 
+	/**
+	 * Liste les locations en cours pour un client
+	 */
 	public void menuP3() {
+		//on a besoin de savoir quel client est en question, on les propose
 		AfficherClients();
 		System.out.println("\n\n" + "Saissisez le n° du client dont vous voulez voir les locations.");
 
@@ -365,13 +395,20 @@ public class Magasin {
 		input.nextLine();
 		
 		try{
+			//on trouve le client et on affiche ses locations en cours
 			this.getClient(Integer.parseInt(selection)).AfficherLocationsEnCours();
 		}catch(Exception e){
 			System.out.println("Selection invalide.");
 		}
+		//on retourne au menu principal
+		menuP();
 	}
 	
+	/**
+	 * Permet d'archiver une location (lorsque le client rend les Articles)
+	 */
 	public void menuP4() {
+		//on a besoin de savoir qui est le client, on propose donc de le séléctionner dans la liste
 		AfficherClients();
 		System.out.println("\n\n" + "Saissisez le n° du client dont vous voulez archiver la locations.");
 
@@ -379,23 +416,34 @@ public class Magasin {
 		input.nextLine();
 		
 		try{
+			//on essaye de le recupérer
 			Client client = this.getClient(Integer.parseInt(selection));
-			client.AfficherLocationsEnCours();
+			int i = 0;
+			for(Location loc : client.getLocations()){
+				System.out.println("Location n°" + i + "\n" + loc.toString());
+				i++;
+			}
 			System.out.println("\n\n" + "Saissisez le n° de la location que vous voulez archiver.");
 			selection = input.next();
 			input.nextLine();
+			//on éssaye de recupérer la location
 			Location loc = client.getLocation(Integer.parseInt(selection));
+			//puis on l'archive
 			client.saveLocation(loc);
 
 			System.out.println("\n\n" + "Location archivé.");
-			menuP();
+			
 
 		}catch(Exception e){
 			System.out.println("Selection invalide.");
 		}
+		menuP();
 	}
-	
+	/**
+	 * Affiche les recettes entre deux dates
+	 */
 	public void menuP5() {
+		//on demande la 1ère date
 		System.out.println("\n\n" + "Saissisez une date de début au format jj/MM/yyyy.");
 		String selection = input.next();
 		String cal1txt = selection;
@@ -404,37 +452,50 @@ public class Magasin {
 		Calendar dateDebut = new GregorianCalendar();
 		Calendar dateFin = new GregorianCalendar();
 		try{
+			//on éssaye de parser la première date
 			tab = selection.split("/");
 			dateDebut = new GregorianCalendar(Integer.parseInt(tab[2]), Integer.parseInt(tab[1])-1, Integer.parseInt(tab[0]));
 		}catch(Exception e){
 			System.out.println("Saisie invalide.");
 		}
 		
+		//on demande la 2ème date
 		System.out.println("\n\n" + "Saissisez une date de fin au format jj/MM/yyyy.");
 		selection = input.next();
 		String cal2txt = selection;
 		input.nextLine();
 		try{
+			//on éssaye de parser la première date
 			tab = selection.split("/");
 			dateFin = new GregorianCalendar(Integer.parseInt(tab[2]), Integer.parseInt(tab[1])-1, Integer.parseInt(tab[0]));
+			
+			if(dateFin.getTimeInMillis() <= dateDebut.getTimeInMillis()){
+				//si la date de fin est plus petite que la date de début c'est une mauvaise saisie donc on retourne au menu principal
+				menuP();
+			}
 		}catch(Exception e){
 			System.out.println("Saisie invalide.");
 			menuP();
 		}
 		
 		float res = 0;
-		
+		//on calcul le montant entre ces deux date pour chaque location de chaque client 
 		for(Client client : this.clients){
 			res += client.getMontantTotalEntre(dateDebut, dateFin);
 		}
 		
+		//on calcul le montant entre ces deux date pour chaque location de chaque fichier de sauvegarde (les location archivé)
+		
 		File f = new File(".");
+		//on veut tous les fichier de sauvegarde
 		Pattern pattern = Pattern.compile("[0-9]{6-6}");
 	    Matcher matcher;
 		for(String s : f.list()){
+			//pour chaque fichier de sauvegarde 
 			matcher = pattern.matcher(s);
 			if(matcher.find()){
 				for(Location loc : Sauvegarde.getSauvegarde(s).getLocations()){
+					//on récupère ou pas le montant de chaque location contenue dans le fichier
 					if(loc.estEntre(dateDebut, dateFin)){
 						res += loc.calculerMontant();
 					}
@@ -443,8 +504,8 @@ public class Magasin {
 		}
 		
 		
-		
-		System.out.println("\n\n" + "Chiffre d'affaire entre " + cal1txt + " et " + cal2txt);
+		//on affiche le résultat
+		System.out.println("\n\n" + "Chiffre d'affaire entre " + cal1txt + " et " + cal2txt + "est de " + res);
 
 		menuP();
 	}
@@ -469,6 +530,9 @@ public class Magasin {
 		}
 	}
 	
+	/**
+	 * Affiche tous les clients du magasin avec un n° associé à leur place dans l'arraylist
+	 */
 	public void AfficherClients(){
 		int i = 0;
 		for(Client client : this.getClients()){
@@ -476,33 +540,48 @@ public class Magasin {
 			i++;
 		}
 	}
-	
+	/**
+	 * Affiche les article après les avoir trié par Intitulé
+	 */
 	public void AfficherArticlesIntitule(){
 		Collections.sort(this.articles, new ArticleIntituleComparator());
 		AfficherTousLesArticles();
 	}
-	
+	/**
+	 * Affiche les article après les avoir trié par Marque
+	 */
 	public void AfficherArticlesMarque(){
 		Collections.sort(this.articles, new ArticleMarqueComparator());
 		AfficherTousLesArticles();
 	}
-	
+	/**
+	 * Affiche les article après les avoir trié par Prix par jour
+	 */
 	public void AfficherArticlesPrix(){
 		Collections.sort(this.articles, new ArticlePrixComparator());
 		AfficherTousLesArticles();
 	}
 	
+	/**
+	 * Affiche les article après les avoir trié par Référence
+	 */
 	public void AfficherArticlesReference(){
 		Collections.sort(this.articles, new ArticleReferenceComparator());	
 		AfficherTousLesArticles();
 	}
 
+	/**
+	 * Affiche les article après les articles
+	 */
 	public void AfficherTousLesArticles(){
 		for(Article article : this.getArticles()){
 			System.out.println(article.toString());
 		}
 	}
 	
+	/**
+	 * Affiche les article en leur associant un n° correspondant à leur index dans l'arrylist
+	 */
 	public void AfficherChoixArticles(){
 		Collections.sort(this.articles, new ArticleIntituleComparator());
 		int i=0;
@@ -512,6 +591,10 @@ public class Magasin {
 		}
 	}
 	
+	/**
+	 * charge un jeu de donné test enregistré dans le fichier
+	 * @param file fichier ou est enregistré le jeu de données
+	 */
 	public void load(String file){
 		
 		try {//si on arrive à trouver le fichier on le charge
@@ -527,10 +610,15 @@ public class Magasin {
 		
 	}
 	
+	/**
+	 * Sauvegarde le jeu de donnée dans un fichier
+	 * @param file fichier ou l'on sauvegarde le jeu de donnée
+	 */
 	public void save(String file){
 		try {
 			FileOutputStream fileOut = new FileOutputStream(file);
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			//on écrit dans le fichier le magasin 
 			out.writeObject(this);
 			out.close();
 			fileOut.close();			

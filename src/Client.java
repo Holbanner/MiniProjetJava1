@@ -158,6 +158,7 @@ public class Client {
 
 	}
 	
+	
 	public String toString(){
 		return this.nom +" "+ this.prénom +"\n";
 	}

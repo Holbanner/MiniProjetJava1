@@ -7,8 +7,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.io.*;
 
-import org.apache.commons.lang3.time.DateUtils;
-
 public class Location implements Serializable {
 	/*
 	 * Attribut
