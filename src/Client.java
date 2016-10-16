@@ -155,10 +155,10 @@ public class Client {
 	public String AfficherLocationsEnCours(){
 		//pour chaque location
 		String res ="";
+		GregorianCalendar cal = new GregorianCalendar();
 		for (Location loc : this.locations){
 			//si la date de début est antérieur à la date actuel et la date de fin postérieur à maintenant
-			if( ((loc.getDateDebut().compareTo(new GregorianCalendar())) < 1) &&
-				((loc.getDateFin().compareTo(new GregorianCalendar())) > 0 ) ){
+			if( loc.getDateDebut().getTimeInMillis()<cal.getTimeInMillis() && loc.getDateFin().getTimeInMillis()>cal.getTimeInMillis()){
 				//afficher la location
 				res += loc.toString() +"\n\n";
 			}

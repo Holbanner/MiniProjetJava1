@@ -394,15 +394,19 @@ public class Magasin {
 		System.out.println("\n\n" + "Saissisez le n° du client dont vous voulez voir les locations.");
 
 		String selection = input.next();
-		input.nextLine();
+
 		
 		try{
 			//on trouve le client et on affiche ses locations en cours
-			this.getClient(Integer.parseInt(selection)).AfficherLocationsEnCours();
+			System.out.println(this.getClient(Integer.parseInt(selection)).AfficherLocationsEnCours());
 		}catch(Exception e){
 			System.out.println("Selection invalide.");
 		}
 		//on retourne au menu principal
+		System.out.println("Appuyer sur entrer pour continuer");
+		input.nextLine();
+		input.nextLine();
+
 		menuP();
 	}
 	
@@ -513,14 +517,6 @@ public class Magasin {
 	}
 	
 	public static void main(String[] args) {
-		ArrayList<Client> client = new ArrayList<Client>();
-		client.add(new Client("Platini", "Michou","20 rue jean", "12132132"));
-		client.add(new Client("Yves", "Zenelse","20 rue anne", "12132132"));
-		client.add(new Client("Bambelle", "Larry","2 rue jean", "12132132"));
-		client.add(new Client("Kan", "Jerry","20 rue je", "12132132"));
-		client.add(new Client("Bon", "Jean","20 rue an", "12132132"));
-		client.add(new Client("Raid", "Aldo","20 rue janne", "12132132"));
-		
 		
 		ArrayList<Article> articles = new ArrayList<Article>();
 		articles.add(new DispositifAcquisition("A123", "Adiddas", "EnormeAppareil", 20, 20, 2000000, new Resolution(1000, 2000), new TypeObjectif(100,500)));
@@ -531,6 +527,25 @@ public class Magasin {
 		articles.add(new Panneau("SA1212", "Mairie de Rennes", "Kenavo", 20, 50, 50));
 		articles.add(new Reflecteur("S2154115", "Arlequin", "boom-blanc", 1000, 2, 200, 200));
 
+		Client platini = new Client("Platini", "Michou","20 rue jean", "12132132");
+		
+		Location location = new Location(new GregorianCalendar(2016,9,10), new GregorianCalendar(2016,9,25), articles);
+		platini.ajouterLocation(location);
+		location = new Location(new GregorianCalendar(2016,9,10), new GregorianCalendar(2016,9,25), articles);
+		platini.ajouterLocation(location);
+
+		ArrayList<Client> client = new ArrayList<Client>();
+		client.add(platini);
+		client.add(new Client("Yves", "Zenelse","20 rue anne", "12132132"));
+		client.add(new Client("Bambelle", "Larry","2 rue jean", "12132132"));
+		client.add(new Client("Kan", "Jerry","20 rue je", "12132132"));
+		client.add(new Client("Bon", "Jean","20 rue an", "12132132"));
+		client.add(new Client("Raid", "Aldo","20 rue janne", "12132132"));
+		
+		
+		
+		
+		
 		Magasin magasin = new Magasin("carouf");
 		
 		magasin.setArticles(articles);
