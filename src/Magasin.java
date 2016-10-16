@@ -421,28 +421,38 @@ public class Magasin {
 		String selection = input.next();
 		input.nextLine();
 		
+		Client client = new Client();
 		try{
 			//on essaye de le recupérer
-			Client client = this.getClient(Integer.parseInt(selection));
-			int i = 0;
-			for(Location loc : client.getLocations()){
-				System.out.println("Location n°" + i + "\n" + loc.toString());
-				i++;
-			}
-			System.out.println("\n\n" + "Saissisez le n° de la location que vous voulez archiver.");
-			selection = input.next();
-			input.nextLine();
+			client = this.getClient(Integer.parseInt(selection));
+		}catch(Exception e){
+			System.out.println("Selection invalide.");
+			menuP();
+		}
+		
+	
+		int i = 0;
+		for(Location loc : client.getLocations()){
+			System.out.println("N°" + i + loc.toString());
+			i++;
+		}
+		System.out.println("\n\n" + "Saissisez le n° de la location que vous voulez archiver.");
+		selection = input.next();
+		input.nextLine();
+		try{
 			//on éssaye de recupérer la location
 			Location loc = client.getLocation(Integer.parseInt(selection));
 			//puis on l'archive
 			client.saveLocation(loc);
 
 			System.out.println("\n\n" + "Location archivé.");
-			
-
 		}catch(Exception e){
 			System.out.println("Selection invalide.");
+			menuP();
+
 		}
+
+		
 		menuP();
 	}
 	/**
