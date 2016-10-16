@@ -110,10 +110,14 @@ public class Client {
 		this.locations = new ArrayList<Location>();
 	}
 
+	public Client() {
+	}
 	/* 
 	 * Méthodes
 	 */
 	
+	
+
 	/**
 	 * Methode qui stock les locations dans un fichier binaire.
 	 * 

@@ -300,12 +300,17 @@ public class Magasin {
 		AfficherClients();
 		System.out.println("Saissisez le client par son n° :");
 		String selection = input.next();
-		
+		Client client = new Client();
 		try{
-			Calendar dateDebut = new GregorianCalendar();
+			client = this.getClient(Integer.parseInt(selection));
+		}catch(Exception e){
+			System.out.println("Saisie invalide.");
+			menuP2();
+		}
 			//on essaye de récupérer le client
-			Client client = this.getClient(Integer.parseInt(selection));
 			
+			Calendar dateDebut = new GregorianCalendar();
+
 			//on demande la date de début
 			System.out.println("Saissisez la date de début au format jj/MM/aaaa");
 			input.nextLine();
@@ -376,9 +381,6 @@ public class Magasin {
 			//on retourne le montant
 			System.out.println("Montant de la location : " + loc.calculerMontant());
 			
-		}catch(Exception e){
-			System.out.println("Selection invalide.");
-		}
 		//on retourne au précédent menu
 		menuP2();
 	}
@@ -513,11 +515,21 @@ public class Magasin {
 	public static void main(String[] args) {
 		ArrayList<Client> client = new ArrayList<Client>();
 		client.add(new Client("Platini", "Michou","20 rue jean", "12132132"));
-		client.add(new Client("Nabila", "JeSaisPlus","20 rue jeanne", "12132132"));
-				
+		client.add(new Client("Yves", "Zenelse","20 rue anne", "12132132"));
+		client.add(new Client("Bambelle", "Larry","2 rue jean", "12132132"));
+		client.add(new Client("Kan", "Jerry","20 rue je", "12132132"));
+		client.add(new Client("Bon", "Jean","20 rue an", "12132132"));
+		client.add(new Client("Raid", "Aldo","20 rue janne", "12132132"));
+		
+		
 		ArrayList<Article> articles = new ArrayList<Article>();
 		articles.add(new DispositifAcquisition("A123", "Adiddas", "EnormeAppareil", 20, 20, 2000000, new Resolution(1000, 2000), new TypeObjectif(100,500)));
 		articles.add(new Fond("A1253", "Adiddas", "LeFondvert", 1, 10, 100, 200));
+		articles.add(new DispositifAcquisition("OSS117", "Levis", "Jean-dj", 20, 20, 2000000, new Resolution(1000, 2000), new TypeObjectif(100,500)));
+		articles.add(new Fond("A1153", "Airness", "LeFondBleu", 1, 10, 100, 200));
+		articles.add(new Panneau("SA1212", "Mairie de Rennes", "STOP", 20, 50, 50));
+		articles.add(new Panneau("SA1212", "Mairie de Rennes", "Kenavo", 20, 50, 50));
+		articles.add(new Reflecteur("S2154115", "Arlequin", "boom-blanc", 1000, 2, 200, 200));
 
 		Magasin magasin = new Magasin("carouf");
 		
