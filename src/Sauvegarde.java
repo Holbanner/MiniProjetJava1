@@ -15,9 +15,13 @@ import java.util.GregorianCalendar;
  */
 public class Sauvegarde {
 
-	private ArrayList<Location> Locations;
+	private ArrayList<LocationSauvegarde> location;
 	private Calendar cal;
 
+	public void addLocationList(LocationSauvegarde loc){
+		this.getLocations().add(loc);
+	}
+	
 	public Sauvegarde(Calendar cal){
 		this.setCal(cal);		
 	}
@@ -36,14 +40,8 @@ public class Sauvegarde {
 			sauvegarde = (Sauvegarde) in.readObject();
 			in.close();
 			fileIn.close();
-		} catch (FileNotFoundException e) {//sinon on créé une nouvelle sauvegarde
+		} catch (Exception e) {
 			sauvegarde = new Sauvegarde(cal);
-		} catch (ClassNotFoundException e) {
-			sauvegarde = new Sauvegarde(cal);
-			e.printStackTrace();
-		} catch (IOException e) {
-			sauvegarde = new Sauvegarde(cal);
-			e.printStackTrace();
 		}
 		
 		return sauvegarde;
@@ -81,11 +79,11 @@ public class Sauvegarde {
 	}
 	
 	
-	public ArrayList<Location> getLocations() {
-		return Locations;
+	public ArrayList<LocationSauvegarde> getLocations() {
+		return location;
 	}
-	public void setLocations(ArrayList<Location> locations) {
-		Locations = locations;
+	public void setLocations(ArrayList<LocationSauvegarde> locations) {
+		location = locations;
 	}
 	public Calendar getCal() {
 		return cal;
@@ -99,9 +97,10 @@ public class Sauvegarde {
 	 * @param client
 	 */
 	public void addLocation(Location location, Client client){
-		LocationSauvegarde locationSauvegarde = (LocationSauvegarde)location;
+		LocationSauvegarde locationSauvegarde = new LocationSauvegarde(location);
 		locationSauvegarde.setClient(client);
-		this.Locations.add(locationSauvegarde);
+		this.addLocationList(locationSauvegarde);
+		
 		this.save();
 	}
 	/**
@@ -109,7 +108,7 @@ public class Sauvegarde {
 	 * @param location
 	 */
 	public void removeLocation(Location location){
-		this.Locations.remove(location);
+		this.location.remove(location);
 		this.save();
 	}
 	

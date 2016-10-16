@@ -433,7 +433,7 @@ public class Magasin {
 	
 		int i = 0;
 		for(Location loc : client.getLocations()){
-			System.out.println("N°" + i + loc.toString());
+			System.out.println("N° " + i + loc.toString());
 			i++;
 		}
 		System.out.println("\n\n" + "Saissisez le n° de la location que vous voulez archiver.");
@@ -442,9 +442,15 @@ public class Magasin {
 		try{
 			//on éssaye de recupérer la location
 			Location loc = client.getLocation(Integer.parseInt(selection));
-			//puis on l'archive
-			client.saveLocation(loc);
+			try{
+				//puis on l'archive
+				client.saveLocation(loc);
+				System.out.println("\n\n" + "azda passs archivé.");
 
+			}catch(Exception e){
+				System.out.println("\n\n" + "Location passs archivé.");
+
+			}
 			System.out.println("\n\n" + "Location archivé.");
 		}catch(Exception e){
 			System.out.println("Selection invalide.");

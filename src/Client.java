@@ -125,7 +125,9 @@ public class Client {
 	 * @throws IOException
 	 */
 	 public void saveLocation(Location lSave){
-		Sauvegarde.getSauvegarde(lSave.getDateFin()).addLocation(lSave, this);
+		Sauvegarde save = Sauvegarde.getSauvegarde(lSave.getDateFin());
+		save.addLocation(lSave, this);
+		
 		this.supprimerLocation(lSave);
 	}
 
