@@ -548,7 +548,7 @@ public class Magasin implements Serializable{
 		
 		Location location = new Location(new GregorianCalendar(2016,9,10), new GregorianCalendar(2016,9,25), articles);
 		platini.ajouterLocation(location);
-		location = new Location(new GregorianCalendar(2016,9,10), new GregorianCalendar(2016,9,25), articles);
+		location = new Location(new GregorianCalendar(2016,9,1), new GregorianCalendar(2016,9,20), articles);
 		platini.ajouterLocation(location);
 
 		ArrayList<Client> client = new ArrayList<Client>();
@@ -558,10 +558,6 @@ public class Magasin implements Serializable{
 		client.add(new Client("Kan", "Jerry","20 rue je", "12132132"));
 		client.add(new Client("Bon", "Jean","20 rue an", "12132132"));
 		client.add(new Client("Raid", "Aldo","20 rue janne", "12132132"));
-		
-		
-		
-		
 		
 		Magasin magasin = new Magasin("carouf");
 		

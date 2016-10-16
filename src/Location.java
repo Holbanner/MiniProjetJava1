@@ -134,7 +134,7 @@ public class Location implements Serializable {
 	public String toString() {
 		String res = "Location : " + "\n";
 		res += "	Date d�but : " + this.dateDebut.get(Calendar.DAY_OF_MONTH) + "/" + this.dateDebut.get(Calendar.DAY_OF_MONTH) + "/" +this.dateDebut.get(Calendar.YEAR) + "\n";
-		res += "	Date d�but : " +this.dateDebut.get(Calendar.DAY_OF_MONTH) + "/" + this.dateDebut.get(Calendar.DAY_OF_MONTH) + "/" +this.dateDebut.get(Calendar.YEAR) + "\n";
+		res += "	Date d�but : " +this.dateFin.get(Calendar.DAY_OF_MONTH) + "/" + this.dateDebut.get(Calendar.DAY_OF_MONTH) + "/" +this.dateFin.get(Calendar.YEAR) + "\n";
 		res += "	Articles lou� : " + "\n";
 		for (Article article : this.articles) {
 			res += article.toString() + "\n" + "\n";
