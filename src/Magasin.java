@@ -136,7 +136,7 @@ public class Magasin implements Serializable{
 		System.out.println("|-----------------------------------|");
 		System.out.println("|                                   |");
 		System.out.println("|          Menu principal:          |");
-		System.out.println("| 		 	----------              |");
+		System.out.println("|           ----------              |");
 		System.out.println("|                                   |");
 		System.out.println("| 1.) Lister les articles           |");
 		System.out.println("| 2.) Enregistrer une location      |");
