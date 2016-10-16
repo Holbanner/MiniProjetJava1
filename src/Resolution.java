@@ -30,6 +30,9 @@ public class Resolution {
 	
 	//méthodes
 	
+	/**
+	 * retourne les infos
+	 */
 	public String toString(){
 		return "	x => " + this.getX() + " y => " + this.getY();
 	}

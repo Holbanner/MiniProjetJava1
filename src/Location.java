@@ -45,15 +45,13 @@ public class Location implements Serializable {
 	}
 
 	/**
-	 * constructeur, avec deux possibilitï¿½s. Le second est une surcharge du
+	 * constructeur, avec deux possibilitï¿½s. Le second est une surcharge du premier permettant d'ajouter des articles un par un au besoin
 	 * 
 	 * @param dateDebut
 	 * @param dateFin
 	 * @param montant
 	 * @param articles
 	 */
-	// premier permettant d'ajouter des articles un par un au besoin
-
 	public Location(Calendar dateDebut, Calendar dateFin, ArrayList<Article> articles) {
 		super();
 		this.dateDebut = dateDebut;
@@ -69,10 +67,12 @@ public class Location implements Serializable {
 		this.articles = new ArrayList<Article>();
 
 	}
-	// methodes
+	/*
+	 *  Méthodes
+	 */
 
 	/**
-	 * calculer montant Location
+	 * calcule le montant de la Location
 	 */
 	public float calculerMontant() {
 
@@ -113,38 +113,11 @@ public class Location implements Serializable {
 	}
 
 	/**
-	 * Retourne la liste d'articles de la location en triant par l'attribut
-	 * dï¿½sirï¿½
-	 * 
-	 * @param arg
-	 *            argument de tri
+	 * Test si la location est entre les deux dates demandé (on regarde la date de début)
+	 * @param date1
+	 * @param date2
+	 * @return
 	 */
-	public void getArticlesBy(String arg) {
-		Comparator comparator;
-		switch (arg) {
-		case "marque":
-			comparator = new ArticleMarqueComparator();
-			break;
-
-		case "intitulï¿½":
-			comparator = new ArticleIntituleComparator();
-			break;
-
-		case "prix":
-			comparator = new ArticlePrixComparator();
-			break;
-
-		case "rï¿½fï¿½rence":
-			comparator = new ArticleReferenceComparator();
-			break;
-
-		default:
-			comparator = new ArticleReferenceComparator();
-			break;
-		}
-		Collections.sort(this.articles, comparator);
-	}
-
 	public boolean estEntre(Calendar date1, Calendar date2){
 		//on considère que le paiment s'éffectue lors de la date de début de la location
 		//si le timestamp est entre les deux autres on renvoie true
@@ -155,7 +128,9 @@ public class Location implements Serializable {
 		
 		
 	}
-	
+	/**
+	 * Retourne les infos
+	 */
 	public String toString() {
 		String res = "Location : " + "\n";
 		res += "	Date dï¿½but : " + this.dateDebut.toString() + "\n";

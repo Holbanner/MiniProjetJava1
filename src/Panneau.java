@@ -33,6 +33,9 @@ public class Panneau extends Article {
 
 	// methodes
 
+	/**
+	 * retourne les infos
+	 */
 	public String toString() {
 		String res = "";
 		res += super.toString();

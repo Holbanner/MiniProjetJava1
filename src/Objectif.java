@@ -48,7 +48,9 @@ public class Objectif extends Article {
 		this.typeObjectif = typeObjectif;
 		this.dispositifAcquisitions = dispositifAcquisitions;
 	}
-	
+	/**
+	 * retourne les infos
+	 */
 	public String toString() {
 		String res = "";
 		res += super.toString() + "\n";

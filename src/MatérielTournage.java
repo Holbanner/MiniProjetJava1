@@ -47,7 +47,7 @@ public class MatérielTournage extends Article {
 
 	// méthodes
 	/**
-	 * 
+	 * Retourne les infos
 	 */
 	public String toString() {
 		String res = "";

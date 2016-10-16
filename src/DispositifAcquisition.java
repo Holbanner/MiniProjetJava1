@@ -1,10 +1,8 @@
 
 public class DispositifAcquisition extends Article{
 	/*
-	 * Attribut
+	 * Attributs
 	 * */
-	
-
 	private int nbPixel;
 	private TypeObjectif typeObjectif;
 	private Resolution resolution;
@@ -36,6 +34,10 @@ public class DispositifAcquisition extends Article{
 		this.resolution = resolution;
 	}
 	
+	/*
+	 * Constructeur
+	 */
+	
 	/**
 	 * Constructreur
 	 * @param ref
@@ -55,7 +57,7 @@ public class DispositifAcquisition extends Article{
 	}
 	
 	/**
-	 * 
+	 * Retourne les info
 	 */
 	public String toString(){
 		String res="";

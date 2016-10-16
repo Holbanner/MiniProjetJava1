@@ -1,7 +1,7 @@
 import java.util.Comparator;
  /**
   * 
-  * @author Olivon
+  * Permet de comparer un article via son Intitule
   *
   */
 public class ArticleIntituleComparator implements Comparator<Article> {

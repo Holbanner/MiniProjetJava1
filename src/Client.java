@@ -74,8 +74,12 @@ public class Client {
 		return this.getLocations().get(index);
 	}
 
+	/*
+	 * Constructeurs
+	 */
+	
 	/**
-	 * constructeur, avec deux possibilités. Le second est une surcharge du
+	 * constructeur, avec deux possibilités. Le second est une surcharge du premier permettant d'ajouter des Locations une par une au besoin
 	 * 
 	 * @param nom
 	 *            :nom client
@@ -88,8 +92,6 @@ public class Client {
 	 * @param locations
 	 *            : ArrayList des locations du client
 	 */
-	// premier permettant d'ajouter des Locations une par une au besoin
-
 	public Client(String nom, String prénom, String coordonné, String numero, ArrayList<Location> locations) {
 		super();
 		this.nom = nom;
@@ -108,7 +110,10 @@ public class Client {
 		this.locations = new ArrayList<Location>();
 	}
 
-	// methode
+	/* 
+	 * Méthodes
+	 */
+	
 	/**
 	 * Methode qui stock les locations dans un fichier binaire.
 	 * 
@@ -158,11 +163,19 @@ public class Client {
 
 	}
 	
-	
+	/**
+	 * Retourne une présentation sommaire du client (son nom puis son prénom
+	 */
 	public String toString(){
 		return this.nom +" "+ this.prénom +"\n";
 	}
 	
+	/**
+	 * Calcul le montant à payer par le client pour ses location entre deux dates pécise
+	 * @param date1
+	 * @param date2
+	 * @return montant
+	 */
 	public float getMontantTotalEntre(Calendar date1, Calendar date2){
 		float res = 0;
 		for( Location loc : locations ){
