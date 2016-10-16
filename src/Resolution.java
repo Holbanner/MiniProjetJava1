@@ -1,5 +1,7 @@
+import java.io.Serializable;
 
-public class Resolution {
+
+public class Resolution implements Serializable{
 	/*
 	 * Attribut
 	 * */

@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -13,7 +14,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Magasin {
+public class Magasin implements Serializable{
 	/*
 	 * Attribut
 	 */
@@ -445,8 +446,6 @@ public class Magasin {
 			try{
 				//puis on l'archive
 				client.saveLocation(loc);
-				System.out.println("\n\n" + "azda passs archivé.");
-
 			}catch(Exception e){
 				System.out.println("\n\n" + "Location passs archivé.");
 

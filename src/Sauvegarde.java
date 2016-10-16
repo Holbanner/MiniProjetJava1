@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -13,17 +14,23 @@ import java.util.GregorianCalendar;
  * @author Adrien
  *
  */
-public class Sauvegarde {
+public class Sauvegarde implements Serializable{
 
-	private ArrayList<LocationSauvegarde> location;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private ArrayList<LocationSauvegarde> locations;
 	private Calendar cal;
 
 	public void addLocationList(LocationSauvegarde loc){
-		this.getLocations().add(loc);
+		ArrayList<LocationSauvegarde> liste = this.getLocations();
+		liste.add(loc);
 	}
 	
 	public Sauvegarde(Calendar cal){
-		this.setCal(cal);		
+		this.setCal(cal);
+		this.setLocations(new ArrayList<LocationSauvegarde>());
 	}
 	/**
 	 * Permet de récuperer une instante de Sauvegarde correspondant à un moi et une année (une date) ; et enregistré dans un fichier
@@ -80,10 +87,10 @@ public class Sauvegarde {
 	
 	
 	public ArrayList<LocationSauvegarde> getLocations() {
-		return location;
+		return this.locations;
 	}
 	public void setLocations(ArrayList<LocationSauvegarde> locations) {
-		location = locations;
+		this.locations = locations;
 	}
 	public Calendar getCal() {
 		return cal;
@@ -108,7 +115,7 @@ public class Sauvegarde {
 	 * @param location
 	 */
 	public void removeLocation(Location location){
-		this.location.remove(location);
+		this.locations.remove(location);
 		this.save();
 	}
 	

@@ -1,5 +1,7 @@
+import java.io.Serializable;
 
-public class TypeObjectif {
+
+public class TypeObjectif implements Serializable{
 	/*
 	 * Attribut
 	 * */
