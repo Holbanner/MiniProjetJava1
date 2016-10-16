@@ -478,6 +478,7 @@ public class Magasin implements Serializable{
 			dateDebut = new GregorianCalendar(Integer.parseInt(tab[2]), Integer.parseInt(tab[1])-1, Integer.parseInt(tab[0]));
 		}catch(Exception e){
 			System.out.println("Saisie invalide.");
+			menuP();
 		}
 		
 		//on demande la 2ème date
@@ -492,6 +493,7 @@ public class Magasin implements Serializable{
 			
 			if(dateFin.getTimeInMillis() <= dateDebut.getTimeInMillis()){
 				//si la date de fin est plus petite que la date de début c'est une mauvaise saisie donc on retourne au menu principal
+				System.out.println("Saisie invalide.");
 				menuP();
 			}
 		}catch(Exception e){
@@ -509,7 +511,7 @@ public class Magasin implements Serializable{
 		
 		File f = new File(".");
 		//on veut tous les fichier de sauvegarde
-		Pattern pattern = Pattern.compile("[0-9]{6-6}");
+		Pattern pattern = Pattern.compile("[0-9]{6}");
 	    Matcher matcher;
 		for(String s : f.list()){
 			//pour chaque fichier de sauvegarde 
@@ -526,8 +528,8 @@ public class Magasin implements Serializable{
 		
 		
 		//on affiche le résultat
-		System.out.println("\n\n" + "Chiffre d'affaire entre " + cal1txt + " et " + cal2txt + "est de " + res);
-
+		System.out.println("\n\n" + "Chiffre d'affaire entre " + cal1txt + " et " + cal2txt + " est de " + res +"€");
+		input.nextLine();
 		menuP();
 	}
 	
